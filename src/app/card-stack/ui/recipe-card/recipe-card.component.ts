@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { PositionService } from '../data/position/position.service';
 import { WindowService } from '../data/window/window.service';
@@ -15,6 +15,8 @@ import { WindowService } from '../data/window/window.service';
 })
 export class RecipeCardComponent {
   
+  index = input.required()
+  
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
   
@@ -25,7 +27,7 @@ export class RecipeCardComponent {
   
   @HostListener('mouseup', ['$event'])
   @HostListener('mouseleave', ['$event'])
-  clearClickStart($event: MouseEvent) {
+  clearClickStart(event: MouseEvent) {
     this.positionService.resetClickStart();
   }
   
@@ -34,6 +36,10 @@ export class RecipeCardComponent {
   }
   
   getTiltDependedStyle() {
+    if (this.index() !== 0) {
+      return {boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.3)'}
+    }
+    
     const {x, y} = this.positionService.cardOffset();
     const windowSize = this.windowService.windowSize();
     
