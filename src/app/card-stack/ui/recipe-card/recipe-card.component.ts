@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, HostListener, inject, Signal, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { fromEvent, map } from 'rxjs';
+import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
 import { NgStyle } from '@angular/common';
+import { PositionService } from '../data/position/position.service';
+import { WindowService } from '../data/window/window.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -15,50 +15,33 @@ import { NgStyle } from '@angular/common';
 })
 export class RecipeCardComponent {
   
-  private windowSize: Signal<number> = toSignal(fromEvent(window, 'resize')
-      .pipe(map(() => window.innerWidth)),
-    {initialValue: window.innerWidth}
-  );
-  
-  private currentPosition = signal<Position>({x: 0, y: 0});
-  private clickStartPosition = signal<Position>({x: 0, y: 0});
-  
-  private shouldTrackOffset = computed<boolean>(() =>
-    !!this.currentPosition().x && !!this.currentPosition().y && !!this.clickStartPosition().x && !!this.clickStartPosition().y);
-  
-  private cardOffset = computed<Position>(() => {
-    if (this.shouldTrackOffset()) {
-      return {
-        x: this.currentPosition().x - this.clickStartPosition().x,
-        y: this.currentPosition().y - this.clickStartPosition().y
-      };
-    } else {
-      return {x: 0, y: 0};
-    }
-  });
+  private positionService = inject(PositionService);
+  private windowService = inject(WindowService);
   
   @HostListener('mousemove', ['$event'])
   setCurrentMousePosition(event: MouseEvent) {
-    this.currentPosition.set({x: event.clientX, y: event.clientY});
+    this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
   }
   
   @HostListener('mouseup', ['$event'])
   @HostListener('mouseleave', ['$event'])
   clearClickStart($event: MouseEvent) {
-    this.clickStartPosition.set({x: 0, y: 0});
+    this.positionService.resetClickStart();
   }
   
   setClickStart(event: MouseEvent) {
-    this.clickStartPosition.set({x: event.clientX, y: event.clientY});
+    this.positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
   }
   
   getTiltDependedStyle() {
-    const {x, y} = this.cardOffset();
+    const {x, y} = this.positionService.cardOffset();
+    const windowSize = this.windowService.windowSize();
+    
     const translateValue = `translate(${x / 1.2}px, ${y / 1.2}px)`;
-    const rotationAngle = (x / this.windowSize()) * 25;
+    const rotationAngle = (x / windowSize) * 25;
     const rotationValue = `rotate(${rotationAngle}deg)`;
     
-    const tiltMultiplier = (x > 0 ? x / this.windowSize() : -x / this.windowSize()) * 4;
+    const tiltMultiplier = (x > 0 ? x / windowSize : -x / windowSize) * 4;
     const rgbaValue = (x > 0 ? `${10 * tiltMultiplier}, ${132 * tiltMultiplier}, ${23 * tiltMultiplier}` : `${220 * tiltMultiplier}, ${53 * tiltMultiplier}, ${69 * tiltMultiplier}`);
     const shadowValue = `0 0 max(20px,calc(30px * ${tiltMultiplier})) 0 rgba(${rgbaValue}, max(0.3,${tiltMultiplier}))`;
     
@@ -67,9 +50,4 @@ export class RecipeCardComponent {
       boxShadow: shadowValue
     };
   }
-}
-
-type Position = {
-  x: number,
-  y: number
 }
