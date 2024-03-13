@@ -8,11 +8,16 @@
       "files": [
         "*.ts"
       ],
+      "parserOptions": {
+        "createDefaultProgram": true
+      },
       "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
+        "plugin:@typescript-eslint/strict",
         "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "plugins": [
+        "unused-imports"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -30,6 +35,30 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "@typescript-eslint/no-extraneous-class" : [
+          "error",
+          {
+            "allowEmpty": true
+          }
+        ],
+        "@angular-eslint/no-empty-lifecycle-method": [
+          "error"
+        ],
+        "semi": [
+          "error",
+          "always"
+        ],
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
         ]
       }
     },
@@ -38,10 +67,19 @@
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended",
-        "plugin:@angular-eslint/template/accessibility"
+        "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.service.ts"
+      ],
+      "extends": [
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "error"
+      }
     }
   ]
 }

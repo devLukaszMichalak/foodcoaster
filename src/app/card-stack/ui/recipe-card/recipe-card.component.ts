@@ -15,7 +15,7 @@ import { WindowService } from '../data/window/window.service';
 })
 export class RecipeCardComponent {
   
-  index = input.required()
+  index = input.required();
   
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
@@ -25,9 +25,9 @@ export class RecipeCardComponent {
     this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
   }
   
-  @HostListener('mouseup', ['$event'])
-  @HostListener('mouseleave', ['$event'])
-  clearClickStart(event: MouseEvent) {
+  @HostListener('mouseup')
+  @HostListener('mouseleave')
+  clearClickStart() {
     this.positionService.resetClickStart();
   }
   
@@ -37,7 +37,7 @@ export class RecipeCardComponent {
   
   getTiltDependedStyle() {
     if (this.index() !== 0) {
-      return {boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.3)'}
+      return {boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.3)'};
     }
     
     const {x, y} = this.positionService.cardOffset();

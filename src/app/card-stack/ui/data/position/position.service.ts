@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Injectable, Signal, signal } from '@angular/core';
 import { Position } from './position';
 
 @Injectable({
@@ -23,8 +23,8 @@ export class PositionService {
     return {x: xOffset, y: yOffset};
   });
   
-  get cardOffset() {
-    return computed(this._cardOffset)
+  get cardOffset(): Signal<Position> {
+    return computed(this._cardOffset);
   }
   
   set currentPosition(position: Position) {
@@ -35,7 +35,7 @@ export class PositionService {
     this._clickStartPosition.set(position);
   }
   
-  resetClickStart() {
+  resetClickStart(): void {
     this._clickStartPosition.set({x: 0, y: 0});
   }
 }
