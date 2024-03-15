@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RecipeStackComponent } from './card-stack/recipe-stack.component';
+import { NgxNightwind } from 'ngx-nightwind';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,10 @@ import { RecipeStackComponent } from './card-stack/recipe-stack.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'foodcoaster';
+
+  constructor(private ngxNightwind: NgxNightwind) {
+    // this.ngxNightwind.enableLight()
+    this.ngxNightwind.enableDark();
+  }
+  
 }

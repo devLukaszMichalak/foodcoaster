@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostListener, inject, input } from 
 import { NgStyle } from '@angular/common';
 import { PositionService } from '../data/position/position.service';
 import { WindowService } from '../data/window/window.service';
+import { NgxNightwind } from 'ngx-nightwind';
 
 @Component({
   selector: 'app-recipe-card',
@@ -19,6 +20,7 @@ export class RecipeCardComponent {
   
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
+  private ngxNightwind = inject(NgxNightwind);
   
   @HostListener('mousemove', ['$event'])
   setCurrentMousePosition(event: MouseEvent) {
@@ -37,7 +39,11 @@ export class RecipeCardComponent {
   
   getTiltDependedStyle() {
     if (this.index() !== 0) {
-      return {boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.3)'};
+      if (this.ngxNightwind.isLight) {
+        return {boxShadow: '0 0 30px 0 rgba(0, 0, 0, 0.3)'};
+      } else {
+        return {boxShadow: '0 0 30px 0 rgba(255, 255, 255, 0.3)'};
+      }
     }
     
     const {x, y} = this.positionService.cardOffset();
@@ -48,8 +54,19 @@ export class RecipeCardComponent {
     const rotationValue = `rotate(${rotationAngle}deg)`;
     
     const tiltMultiplier = (x > 0 ? x / windowSize : -x / windowSize) * 4;
-    const rgbaValue = (x > 0 ? `${10 * tiltMultiplier}, ${132 * tiltMultiplier}, ${23 * tiltMultiplier}` : `${220 * tiltMultiplier}, ${53 * tiltMultiplier}, ${69 * tiltMultiplier}`);
-    const shadowValue = `0 0 max(20px,calc(30px * ${tiltMultiplier})) 0 rgba(${rgbaValue}, max(0.3,${tiltMultiplier}))`;
+    
+    let rgbaValue;
+    if (this.ngxNightwind.isLight) {
+      rgbaValue = (x > 0 ?
+        `${10 * tiltMultiplier}, ${200 * tiltMultiplier}, ${10 * tiltMultiplier}` :
+        `${200 * tiltMultiplier}, ${10 * tiltMultiplier}, ${10 * tiltMultiplier}`);
+    } else {
+      rgbaValue = (x < 0 ?
+        `${255 - 10 * tiltMultiplier}, ${255 - 200 * tiltMultiplier}, ${255 - 200 * tiltMultiplier}` :
+        `${255 - 200 * tiltMultiplier}, ${255 - 10 * tiltMultiplier}, ${255 - 200 * tiltMultiplier}`);
+    }
+    
+    const shadowValue = `0 0 max(30px,calc(30px * ${tiltMultiplier})) 0 rgba(${rgbaValue}, max(0.3,${tiltMultiplier}))`;
     
     return {
       transform: `${translateValue} ${rotationValue}`,
