@@ -67,7 +67,7 @@ workflows:
               only: main
           requires:
             - setup
-      - build:
+      - build_and_deploy:
           filters:
             branches:
               only: main
