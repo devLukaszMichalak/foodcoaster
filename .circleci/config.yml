@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  setup:
+  build_and_deploy:
     docker:
       - image: andreysenov/firebase-tools:13.5.1-node-20
     working_directory: ~/repo
@@ -20,30 +20,9 @@ jobs:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
-      - persist_to_workspace:
-          root: .
-          paths:
-            - node_modules
-  lint:
-    docker:
-      - image: andreysenov/firebase-tools:13.5.1-node-20
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run: npm run lint
-  build_and_deploy:
-    docker:
-      - image: andreysenov/firebase-tools:13.5.1-node-20
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
       - run:
           name: Build project
-          command: npm run build
+          command: npm run build --prod
       - run:
           name: Make keys file
           command: echo ${FOOD_KEYS} > keys.json
@@ -55,21 +34,9 @@ jobs:
 
 
 workflows:
-  lint_build_test:
+  build_and_deploy:
     jobs:
-      - setup:
-          filters:
-            branches:
-              only: main
-      - lint:
-          filters:
-            branches:
-              only: main
-          requires:
-            - setup
       - build_and_deploy:
           filters:
             branches:
-              only: main
-          requires:
-            - lint
+              only: master
