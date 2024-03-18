@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "your-dinner-idea-is-here"
+  },
+  "targets": {
+    "your-dinner-idea-is-here": {
+      "hosting": {
+        "your-dinner-idea-is-here": [
+          "your-dinner-idea-is-here"
+        ]
+      }
+    }
+  }
+}
