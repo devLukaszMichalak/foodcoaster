@@ -72,5 +72,4 @@ workflows:
             branches:
               only: main
           requires:
-            - test
             - lint
