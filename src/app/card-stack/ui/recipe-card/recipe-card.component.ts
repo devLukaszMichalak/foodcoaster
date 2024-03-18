@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, inject, input } from '@angular/core';
 import { NgStyle } from '@angular/common';
-import { PositionService } from '../data/position/position.service';
-import { WindowService } from '../data/window/window.service';
+import { PositionService } from '../../data/position/position.service';
+import { WindowService } from '../../data/window/window.service';
 import { NgxNightwind } from 'ngx-nightwind';
 
 @Component({
