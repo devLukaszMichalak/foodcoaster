@@ -61,7 +61,7 @@ workflows:
           filters:
             branches:
               only: main
-      - test:
+      - lint:
           filters:
             branches:
               only: main
