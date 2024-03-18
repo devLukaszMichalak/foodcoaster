@@ -14,7 +14,7 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: npm install
+          command: npm install --package-lock
       - save_cache:
           name: Save cache
           key: npm-cache-{{ checksum "package-lock.json" }}
@@ -22,7 +22,7 @@ jobs:
             - ~/.npm
       - run:
           name: Build project
-          command: npm run build --prod
+          command: npm run build
       - run:
           name: Make keys file
           command: echo ${FOOD_KEYS} > keys.json
