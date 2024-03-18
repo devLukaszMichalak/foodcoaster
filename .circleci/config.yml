@@ -32,11 +32,10 @@ jobs:
           environment:
             GOOGLE_APPLICATION_CREDENTIALS: "keys.json"
 
-
 workflows:
   build_and_deploy:
     jobs:
       - build_and_deploy:
           filters:
             branches:
-              only: master
+              only: main
