@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RecipeStackComponent } from './card-stack/recipe-stack.component';
 import { NgxNightwind } from 'ngx-nightwind';
@@ -12,9 +12,11 @@ import { NgxNightwind } from 'ngx-nightwind';
 })
 export class AppComponent {
 
-  constructor(private ngxNightwind: NgxNightwind) {
+  private ngxNightwind = inject(NgxNightwind);
+  
+  constructor() {
     // this.ngxNightwind.enableLight()
-    this.ngxNightwind.enableDark();
+    // this.ngxNightwind.enableDark();
   }
   
 }

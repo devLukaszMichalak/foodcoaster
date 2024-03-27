@@ -9,17 +9,31 @@
         "*.ts"
       ],
       "parserOptions": {
-        "createDefaultProgram": true
+        "createDefaultProgram": true,
+        "project": [
+          "./tsconfig.app.json", "./tsconfig.json"
+        ]
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@typescript-eslint/strict",
+        "plugin:rxjs/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "plugins": [
-        "unused-imports"
+        "unused-imports",
+        "rxjs",
+        "@rdlabo/rules"
       ],
       "rules": {
+        "no-console": "warn",
+        "no-alert": "warn",
+        "rxjs/no-implicit-any-catch": "warn",
+        "no-debugger": "error",
+        "no-bitwise": "error",
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "@rdlabo/rules/import-inject-object": "error",
+        "@rdlabo/rules/deny-constructor-di": "error",
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -36,7 +50,7 @@
             "style": "kebab-case"
           }
         ],
-        "@typescript-eslint/no-extraneous-class" : [
+        "@typescript-eslint/no-extraneous-class": [
           "error",
           {
             "allowEmpty": true
@@ -49,7 +63,7 @@
           "error",
           "always"
         ],
-        "no-unused-vars": "off",
+        "no-unused-vars": "warn",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
@@ -68,6 +82,7 @@
       ],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility",
         "plugin:tailwindcss/recommended"
       ],
       "rules": {}
