@@ -24,7 +24,7 @@ private _recipes = signal<Recipe[]>([
   
   next = () => this._recipes.update(recipes => {
     recipes.shift();
-    return [...recipes]
+    return [...recipes];
   });
 }
 

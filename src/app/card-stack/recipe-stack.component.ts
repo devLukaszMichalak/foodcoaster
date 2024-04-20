@@ -3,13 +3,19 @@ import { RecipeCardComponent } from './ui/recipe-card/recipe-card.component';
 import { Recipe, RecipeService } from './data/recipe/recipe.service';
 import { NgStyle } from '@angular/common';
 import { PositionService } from './data/position/position.service';
+import { OptionsComponent } from './ui/options/options.component';
+import { RouterOutlet } from '@angular/router';
+import { PickButtonsComponent } from './ui/pick-buttons/pick-buttons.component';
 
 @Component({
   selector: 'app-recipe-stack',
   standalone: true,
   imports: [
     RecipeCardComponent,
-    NgStyle
+    NgStyle,
+    OptionsComponent,
+    RouterOutlet,
+    PickButtonsComponent
   ],
   templateUrl: './recipe-stack.component.html',
   styleUrl: './recipe-stack.component.scss',
@@ -24,8 +30,8 @@ export class RecipeStackComponent {
   protected readonly console = console;
   
   nextCard(isAccepted: boolean) {
-    this.recipeService.next()
-    this.positionService.reset()
+    this.recipeService.next();
+    this.positionService.reset();
   }
   
 }
