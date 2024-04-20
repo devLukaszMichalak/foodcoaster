@@ -1,8 +1,9 @@
 <div class="flex size-full items-center justify-center">
-    @for (recipe of recipes; track recipe) {
+    @for (recipe of recipes(); track recipe) {
         <app-recipe-card [ngStyle]="{'z-index': $count - $index}"
                          [index]="$index"
                          [recipe]="recipe"
+                         (nextCardEvent)="nextCard($event)"
                          class="absolute z-10"/>
     }
 </div>

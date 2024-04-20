@@ -47,7 +47,7 @@ export class PositionService {
     this._clickStartPosition.set(position);
   }
   
-  resetClickStart(): void {
+  reset(): void {
     this._clickStartPosition.set({x: 0, y: 0});
   }
 }

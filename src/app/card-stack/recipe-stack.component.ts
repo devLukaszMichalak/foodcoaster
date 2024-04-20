@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { RecipeCardComponent } from './ui/recipe-card/recipe-card.component';
-import { RecipeService } from './data/recipe/recipe.service';
+import { Recipe, RecipeService } from './data/recipe/recipe.service';
 import { NgStyle } from '@angular/common';
+import { PositionService } from './data/position/position.service';
 
 @Component({
   selector: 'app-recipe-stack',
@@ -15,8 +16,16 @@ import { NgStyle } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipeStackComponent {
-
-  private recipeService = inject(RecipeService);
   
-  recipes = this.recipeService.recipes();
+  private recipeService = inject(RecipeService);
+  private positionService = inject(PositionService);
+  
+  recipes: Signal<Recipe[]> = this.recipeService.recipes;
+  protected readonly console = console;
+  
+  nextCard(isAccepted: boolean) {
+    this.recipeService.next()
+    this.positionService.reset()
+  }
+  
 }

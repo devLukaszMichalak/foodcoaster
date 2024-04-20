@@ -21,6 +21,11 @@ private _recipes = signal<Recipe[]>([
   get recipes(): Signal<Recipe[]> {
     return computed(() => this._recipes());
   }
+  
+  next = () => this._recipes.update(recipes => {
+    recipes.shift();
+    return [...recipes]
+  });
 }
 
 export type Recipe = {

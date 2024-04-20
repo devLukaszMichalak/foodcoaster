@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, input, output } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { PositionService } from '../../data/position/position.service';
 import { WindowService } from '../../data/window/window.service';
@@ -20,25 +20,27 @@ export class RecipeCardComponent {
   index = input.required<number>();
   recipe = input.required<Recipe>();
   
+  nextCardEvent = output<boolean>();
+  
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
   private ngxNightwind = inject(NgxNightwind);
   
   @HostListener('mousemove', ['$event'])
   setCurrentMousePosition(event: MouseEvent) {
-    this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
+    if (this.index() == 0) {
+      this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
+    }
   }
   
   @HostListener('mouseup')
   @HostListener('mouseleave')
   clearClickStart() {
-    if (this.positionService.isAccepted()) {
-      //navigate to details with sweet animation
-    } else if (this.positionService.isRejected()) {
-      //next card
+    if (this.positionService.isAfterThreshold()) {
+      this.nextCardEvent.emit(this.positionService.isAccepted());
+    } else {
+      this.positionService.reset();
     }
-    
-    this.positionService.resetClickStart();
   }
   
   setClickStart(event: MouseEvent) {

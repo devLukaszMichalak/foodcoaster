@@ -8,7 +8,7 @@
 }
 
 body {
-  @apply absolute top-0 left-0 h-full w-full m-0 p-0 bg-gray-100;
+  @apply absolute top-0 left-0 h-full w-full m-0 p-0 bg-gray-100 overflow-x-clip;
 
   * {
     @apply tracking-wide;
