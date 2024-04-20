@@ -23,8 +23,20 @@ export class PositionService {
     return {x: xOffset, y: yOffset};
   });
   
+  get isAccepted(): Signal<boolean> {
+    return computed(() => this._cardOffset().x > window.innerWidth / 4);
+  }
+  
+  get isRejected(): Signal<boolean> {
+    return computed(() => -this._cardOffset().x > window.innerWidth / 4);
+  }
+  
+  get isAfterThreshold(): Signal<boolean> {
+    return computed(() => this.isAccepted() || this.isRejected());
+  }
+  
   get cardOffset(): Signal<Position> {
-    return computed(this._cardOffset);
+    return computed(() => this._cardOffset());
   }
   
   set currentPosition(position: Position) {

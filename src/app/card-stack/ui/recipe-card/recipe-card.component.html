@@ -1,4 +1,8 @@
-<div class="bg-amber-50 h-96 w-72 rounded-md p-8"
+<div class="bg-blue-100 flex h-96
+ max-h-fit w-72 flex-col items-center justify-center rounded-md py-2"
      [ngStyle]="getTiltDependedStyle()"
      (mousedown)="setClickStart($event)">
+    <div class="w-full pb-2 ps-2 capitalize">{{ recipe().name }}</div>
+    <img [src]="recipe().imgUrl" alt="Food image" class="pointer-events-none h-[150%] pb-2 w-full object-cover">
+    <div class="pointer-events-none ps-2 size-full">{{ recipe().description }}</div>
 </div>

@@ -11,11 +11,11 @@ import { NgxNightwind } from 'ngx-nightwind';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-
+  
   private ngxNightwind = inject(NgxNightwind);
   
   constructor() {
-    // this.ngxNightwind.enableLight()
+    this.ngxNightwind.enableLight();
     // this.ngxNightwind.enableDark();
   }
   

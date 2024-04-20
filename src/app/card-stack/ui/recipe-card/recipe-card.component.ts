@@ -3,6 +3,7 @@ import { NgStyle } from '@angular/common';
 import { PositionService } from '../../data/position/position.service';
 import { WindowService } from '../../data/window/window.service';
 import { NgxNightwind } from 'ngx-nightwind';
+import { Recipe } from '../../data/recipe/recipe.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -16,7 +17,8 @@ import { NgxNightwind } from 'ngx-nightwind';
 })
 export class RecipeCardComponent {
   
-  index = input.required();
+  index = input.required<number>();
+  recipe = input.required<Recipe>();
   
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
@@ -30,6 +32,12 @@ export class RecipeCardComponent {
   @HostListener('mouseup')
   @HostListener('mouseleave')
   clearClickStart() {
+    if (this.positionService.isAccepted()) {
+      //navigate to details with sweet animation
+    } else if (this.positionService.isRejected()) {
+      //next card
+    }
+    
     this.positionService.resetClickStart();
   }
   
@@ -68,9 +76,12 @@ export class RecipeCardComponent {
     
     const shadowValue = `0 0 max(30px,calc(30px * ${tiltMultiplier})) 0 rgba(${rgbaValue}, max(0.3,${tiltMultiplier}))`;
     
+    const opacityValue = this.positionService.isAfterThreshold() ? '0.6' : '1';
+    
     return {
       transform: `${translateValue} ${rotationValue}`,
-      boxShadow: shadowValue
+      boxShadow: shadowValue,
+      opacity: opacityValue
     };
   }
 }

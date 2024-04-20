@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Barlow-Regulr';
+  src: url('/assets/Barlow-Regular.ttf') format('truetype');
+}
+
 body {
-  @apply absolute top-0 left-0 h-full w-full m-0 p-0 bg-white;
+  @apply absolute top-0 left-0 h-full w-full m-0 p-0 bg-gray-100;
+
+  * {
+    @apply tracking-wide;
+    font-family: 'Barlow-Regulr', sans-serif;
+  }
 }
