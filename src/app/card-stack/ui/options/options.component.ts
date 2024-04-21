@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroMoonSolid, heroSunSolid } from '@ng-icons/heroicons/solid';
 import { NgxNightwind } from 'ngx-nightwind';
+import { heroMoon, heroSun } from '@ng-icons/heroicons/outline';
 
 @Component({
   selector: 'app-options',
@@ -9,7 +9,7 @@ import { NgxNightwind } from 'ngx-nightwind';
   imports: [
     NgIconComponent
   ],
-  providers: [provideIcons({heroMoonSolid, heroSunSolid})],
+  providers: [provideIcons({heroMoon, heroSun})],
   templateUrl: './options.component.html',
   styleUrl: './options.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,6 +21,6 @@ export class OptionsComponent {
   toggleDarkMode = () => this.ngxNightwind.toggle();
   
   getDarkModeIconName = () =>
-    this.ngxNightwind.isLight ? 'heroMoonSolid' : 'heroSunSolid';
+    this.ngxNightwind.isLight ? 'heroMoon' : 'heroSun';
   
 }
