@@ -1,6 +1,7 @@
 <button type="button"
         [ngStyle]="rejectStyle()"
         (click)="reject()"
+        [@wobble]="rejectButtonAnimationOscillator"
         class="text-gray-100 bg-red-400 absolute bottom-4 left-[calc(50%-120px)] inline-flex rounded-xl p-2 shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-[transform,background-color,color] hover:bg-red-500 active:scale-95">
     <ng-icon name="heroXMark" size="3rem"></ng-icon>
 </button>
@@ -8,6 +9,7 @@
 <button type="button"
         [ngStyle]="acceptStyle()"
         (click)="accept()"
+        [@rubberBand]="acceptButtonAnimationOscillator"
         class="text-gray-100 bg-green-400 absolute bottom-4 right-[calc(50%-120px)] inline-flex rounded-xl p-2 shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-[transform,background-color,color] hover:bg-green-500 active:scale-95">
     <ng-icon name="heroHeart" size="3rem"></ng-icon>
 </button>

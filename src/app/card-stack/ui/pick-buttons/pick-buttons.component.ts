@@ -5,6 +5,8 @@ import { NgStyle } from '@angular/common';
 import { WindowService } from '../../data/window/window.service';
 import { NgxNightwind } from 'ngx-nightwind';
 import { heroHeart, heroXMark } from '@ng-icons/heroicons/outline';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { rubberBand, tada, wobble } from 'ng-animate';
 
 @Component({
   selector: 'app-pick-buttons',
@@ -16,11 +18,22 @@ import { heroHeart, heroXMark } from '@ng-icons/heroicons/outline';
   providers: [provideIcons({heroHeart, heroXMark})],
   templateUrl: './pick-buttons.component.html',
   styleUrl: './pick-buttons.component.scss',
+  animations: [
+    trigger('rubberBand', [
+      transition('false => true, true => false', useAnimation(rubberBand, {params: {timing: 0.5}}))]
+    ),
+    trigger('wobble', [
+      transition('false => true, true => false', useAnimation(wobble, {params: {timing: 0.5}}))]
+    )
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PickButtonsComponent {
   
   nextCardEvent = output<boolean>();
+  
+  acceptButtonAnimationOscillator = false;
+  rejectButtonAnimationOscillator = true;
   
   private positionService = inject(PositionService);
   private ngxNightwind = inject(NgxNightwind);
@@ -51,7 +64,13 @@ export class PickButtonsComponent {
   rejectStyle = computed(() =>
     ({...this.rejectScale(), ...this.rejectColor()}));
   
-  reject = () => this.nextCardEvent.emit(false);
+  reject = () => {
+    this.nextCardEvent.emit(false);
+    this.rejectButtonAnimationOscillator = !this.rejectButtonAnimationOscillator;
+  };
   
-  accept = () => this.nextCardEvent.emit(true);
+  accept = () => {
+    this.nextCardEvent.emit(true);
+    this.acceptButtonAnimationOscillator = !this.acceptButtonAnimationOscillator;
+  };
 }
