@@ -23,6 +23,10 @@ import { transition, trigger, useAnimation } from '@angular/animations';
         transition(':enter', useAnimation(fadeInRight, {params: {timing: 0.2}})),
         transition(':leave', useAnimation(fadeOutRight, {params: {timing: 0.2}}))
       ]
+    ),
+    trigger('enterFadeRight', [
+        transition(':enter', useAnimation(fadeInRight, {params: {timing: 0.5}}))
+      ]
     )
   ]
 })

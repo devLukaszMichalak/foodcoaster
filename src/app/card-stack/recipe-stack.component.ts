@@ -8,6 +8,8 @@ import { RouterOutlet } from '@angular/router';
 import { PickButtonsComponent } from './ui/pick-buttons/pick-buttons.component';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { fadeInDown } from 'ng-animate';
 
 @Component({
   selector: 'app-recipe-stack',
@@ -21,6 +23,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
   templateUrl: './recipe-stack.component.html',
   styleUrl: './recipe-stack.component.scss',
+  animations: [
+    trigger('fadeInDown', [
+        transition(':enter', useAnimation(fadeInDown, {params: {timing: 0.5}}))
+      ]
+    )
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipeStackComponent {
