@@ -6,6 +6,11 @@ module.exports = {
     ],
     theme: {
         extend: {},
+        nightwind: {
+            colorScale: {
+                50: 950, // default 900
+            },
+        },
     },
     plugins: [
         require('@tailwindcss/container-queries'),

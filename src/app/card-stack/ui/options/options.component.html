@@ -1,5 +1,26 @@
-<button type="button"
-        (click)="toggleDarkMode()"
-        class="text-gray-100 bg-blue-400 hover:bg-blue-500 absolute right-4 top-4 inline-flex rounded-xl p-2 transition-all active:scale-95">
-    <ng-icon [name]="getDarkModeIconName()" size="2.5rem"></ng-icon>
-</button>
+<div class="absolute right-4 top-4">
+    <button [@swing]="isMenuOpen()"
+            class="text-gray-100 bg-teal-400 inline-flex rounded-xl p-2 shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-all hover:bg-teal-500 active:scale-95"
+            (click)="toggleMenu()">
+        <ng-icon [name]="getMenuIconName()" size="2.5rem"></ng-icon>
+    </button>
+    @if (isMenuOpen()) {
+        <div [@fadeInOut] class="relative left-0 border-0 z-50">
+            <button type="button"
+                    (click)="toggleDarkMode()"
+                    class="text-gray-100 bg-teal-400 flex mt-5 rounded-xl p-2 shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-all hover:bg-teal-500 active:scale-95">
+                <ng-icon [name]="getDarkModeIconName()" size="2.5rem"></ng-icon>
+            </button>
+            <button type="button"
+                    (click)="toggleDarkMode()"
+                    class="text-gray-100 bg-teal-400 flex mt-2 rounded-xl p-2 shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-all hover:bg-teal-500 active:scale-95">
+                <ng-icon [name]="getDarkModeIconName()" size="2.5rem"></ng-icon>
+            </button>
+            <button type="button"
+                    (click)="toggleDarkMode()"
+                    class="text-gray-100 bg-teal-400 flex mt-2 rounded-xl p-2 shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-all hover:bg-teal-500 active:scale-95">
+                <ng-icon [name]="getDarkModeIconName()" size="2.5rem"></ng-icon>
+            </button>
+        </div>
+    }
+</div>

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroCheckSolid, heroXMarkSolid } from '@ng-icons/heroicons/solid';
 import { PositionService } from '../../data/position/position.service';
 import { NgStyle } from '@angular/common';
 import { WindowService } from '../../data/window/window.service';
 import { NgxNightwind } from 'ngx-nightwind';
+import { heroHeart, heroXMark } from '@ng-icons/heroicons/outline';
 
 @Component({
   selector: 'app-pick-buttons',
@@ -13,7 +13,7 @@ import { NgxNightwind } from 'ngx-nightwind';
     NgIconComponent,
     NgStyle
   ],
-  providers: [provideIcons({heroCheckSolid, heroXMarkSolid})],
+  providers: [provideIcons({heroHeart, heroXMark})],
   templateUrl: './pick-buttons.component.html',
   styleUrl: './pick-buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, HostListener, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { PositionService } from '../../data/position/position.service';
 import { WindowService } from '../../data/window/window.service';
-import { NgxNightwind } from 'ngx-nightwind';
 import { Recipe } from '../../data/recipe/recipe.service';
 
 @Component({
@@ -20,28 +19,8 @@ export class RecipeCardComponent {
   index = input.required<number>();
   recipe = input.required<Recipe>();
   
-  nextCardEvent = output<boolean>();
-  
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
-  private ngxNightwind = inject(NgxNightwind);
-  
-  @HostListener('mousemove', ['$event'])
-  setCurrentMousePosition(event: MouseEvent) {
-    if (this.index() == 0) {
-      this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
-    }
-  }
-  
-  @HostListener('mouseup')
-  @HostListener('mouseleave')
-  clearClickStart() {
-    if (this.positionService.isAfterThreshold()) {
-      this.nextCardEvent.emit(this.positionService.isAccepted());
-    } else {
-      this.positionService.reset();
-    }
-  }
   
   setClickStart(event: MouseEvent) {
     this.positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
@@ -49,11 +28,7 @@ export class RecipeCardComponent {
   
   getTiltDependedStyle() {
     if (this.index() !== 0) {
-      if (this.ngxNightwind.isLight) {
-        return {boxShadow: '0 0 30px 0 rgba(0, 0, 0, 0.3)'};
-      } else {
-        return {boxShadow: '0 0 30px 0 rgba(255, 255, 255, 0.3)'};
-      }
+      return {boxShadow: '0 0 30px 0 rgba(0, 0, 0, 0.3)'};
     }
     
     const {x, y} = this.positionService.cardOffset();
@@ -65,18 +40,11 @@ export class RecipeCardComponent {
     
     const tiltMultiplier = (x > 0 ? x / windowSize : -x / windowSize) * 4;
     
-    let rgbaValue;
-    if (this.ngxNightwind.isLight) {
-      rgbaValue = (x > 0 ?
-        `${10 * tiltMultiplier}, ${200 * tiltMultiplier}, ${10 * tiltMultiplier}` :
-        `${200 * tiltMultiplier}, ${10 * tiltMultiplier}, ${10 * tiltMultiplier}`);
-    } else {
-      rgbaValue = (x < 0 ?
-        `${255 - 10 * tiltMultiplier}, ${255 - 200 * tiltMultiplier}, ${255 - 200 * tiltMultiplier}` :
-        `${255 - 200 * tiltMultiplier}, ${255 - 10 * tiltMultiplier}, ${255 - 200 * tiltMultiplier}`);
-    }
+    const shadowRgbaValue = (x > 0 ?
+      `${10 * tiltMultiplier}, ${200 * tiltMultiplier}, ${10 * tiltMultiplier}` :
+      `${200 * tiltMultiplier}, ${10 * tiltMultiplier}, ${10 * tiltMultiplier}`);
     
-    const shadowValue = `0 0 max(30px,calc(30px * ${tiltMultiplier})) 0 rgba(${rgbaValue}, max(0.3,${tiltMultiplier}))`;
+    const shadowValue = `0 0 max(30px,calc(30px * ${tiltMultiplier})) 0 rgba(${shadowRgbaValue}, max(0.3,${tiltMultiplier}))`;
     
     const opacityValue = this.positionService.isAfterThreshold() ? '0.6' : '1';
     

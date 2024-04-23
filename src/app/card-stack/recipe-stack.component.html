@@ -1,15 +1,14 @@
 <app-options/>
 
-<div class="flex size-full items-center justify-center flex-col">
+<div class="flex size-full flex-col items-center justify-center">
     @for (recipe of recipes(); track recipe) {
         <app-recipe-card [ngStyle]="{'z-index': $count - $index}"
                          [index]="$index"
                          [recipe]="recipe"
-                         (nextCardEvent)="nextCard($event)"
                          class="absolute z-10"/>
     } @empty {
-        <p>No more recipes found!</p>
-        <p>All hope is lost...</p>
+        <p class="text-black">No more recipes found!</p>
+        <p class="text-black">All hope is lost...</p>
     }
 </div>
 
