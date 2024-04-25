@@ -43,6 +43,14 @@ export class PositionService {
     this._currentPosition.set(position);
   }
   
+  get currentPosition(): Signal<Position> {
+    return computed(() => this._currentPosition());
+  }
+  
+  get clickStartPosition(): Signal<Position> {
+    return computed(() => this._clickStartPosition());
+  }
+  
   set clickStartPosition(position: Position) {
     this._clickStartPosition.set(position);
   }

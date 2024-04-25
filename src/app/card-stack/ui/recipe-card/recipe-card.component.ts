@@ -46,7 +46,11 @@ export class RecipeCardComponent {
     
     const shadowValue = `0 0 max(30px,calc(30px * ${tiltMultiplier})) 0 rgba(${shadowRgbaValue}, max(0.3,${tiltMultiplier}))`;
     
-    const opacityValue = this.positionService.isAfterThreshold() ? '0.6' : '1';
+    const isFromAnimatingFromButtons = Math.abs(this.positionService.clickStartPosition().x) === 1;
+    
+    const shouldFade = this.positionService.isAfterThreshold() && !isFromAnimatingFromButtons;
+    
+    const opacityValue = shouldFade ? '0.6' : '1';
     
     return {
       transform: `${translateValue} ${rotationValue}`,

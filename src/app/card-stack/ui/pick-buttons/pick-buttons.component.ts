@@ -7,6 +7,7 @@ import { NgxNightwind } from 'ngx-nightwind';
 import { heroHeart, heroXMark } from '@ng-icons/heroicons/outline';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { fadeInLeft, fadeInRight, rubberBand, wobble } from 'ng-animate';
+import { NextCardEvent } from '../../recipe-stack.component';
 
 @Component({
   selector: 'app-pick-buttons',
@@ -38,7 +39,7 @@ import { fadeInLeft, fadeInRight, rubberBand, wobble } from 'ng-animate';
 })
 export class PickButtonsComponent {
   
-  nextCardEvent = output<boolean>();
+  nextCardEvent = output<NextCardEvent>();
   
   acceptButtonAnimationOscillator = false;
   rejectButtonAnimationOscillator = true;
@@ -53,9 +54,10 @@ export class PickButtonsComponent {
   
   private isOffsetPositive = computed(() => this.cardOffset().x > 0);
   private scaleRawValue = computed(() => (this.windowSize() + Math.abs(this.cardOffset().x)) / this.windowSize());
+  private scaleValue = computed(() => this.scaleRawValue() >= 1.25 ? 1.25 : this.scaleRawValue());
   
   private acceptScale = computed(() =>
-    ({scale: this.isOffsetPositive() ? this.scaleRawValue() : 1}));
+    ({scale: this.isOffsetPositive() ? this.scaleValue() : 1}));
   
   private acceptColor = computed(() =>
     ({backgroundColor: this.isAccepted() ? (this.ngxNightwind.isLight ? 'rgb(34, 197, 94)' : 'rgb(74, 222, 128)') : ''}));
@@ -64,7 +66,7 @@ export class PickButtonsComponent {
     ({...this.acceptScale(), ...this.acceptColor()}));
   
   private rejectScale = computed(() =>
-    ({scale: !this.isOffsetPositive() ? this.scaleRawValue() : 1}));
+    ({scale: !this.isOffsetPositive() ? this.scaleValue() : 1}));
   
   private rejectColor = computed(() =>
     ({backgroundColor: this.isRejected() ? (this.ngxNightwind.isLight ? 'rgb(239, 68, 68)' : 'rgb(248, 113, 113)') : ''}));
@@ -73,12 +75,15 @@ export class PickButtonsComponent {
     ({...this.rejectScale(), ...this.rejectColor()}));
   
   reject = () => {
-    this.nextCardEvent.emit(false);
+    this.positionService.clickStartPosition = {x: -1, y: -1};
+    this.nextCardEvent.emit({isAccepted: false, position: this.positionService.clickStartPosition()});
     this.rejectButtonAnimationOscillator = !this.rejectButtonAnimationOscillator;
   };
   
   accept = () => {
-    this.nextCardEvent.emit(true);
+    this.positionService.clickStartPosition = {x: 1, y: 1};
+    this.nextCardEvent.emit({isAccepted: true, position: this.positionService.clickStartPosition()});
     this.acceptButtonAnimationOscillator = !this.acceptButtonAnimationOscillator;
   };
+  
 }
