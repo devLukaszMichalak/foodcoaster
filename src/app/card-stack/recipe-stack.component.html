@@ -12,4 +12,4 @@
     }
 </div>
 
-<app-pick-buttons (nextCardEvent)="nextCardEventHandler($event)"/>
+<app-pick-buttons [isAnimating]="isAnimatingCard()" (nextCardEvent)="nextCardEventHandler($event)"/>

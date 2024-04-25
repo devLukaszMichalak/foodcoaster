@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { PositionService } from '../../data/position/position.service';
 import { NgStyle } from '@angular/common';
@@ -38,6 +38,8 @@ import { NextCardEvent } from '../../recipe-stack.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PickButtonsComponent {
+  
+  isAnimating = input.required<boolean>();
   
   nextCardEvent = output<NextCardEvent>();
   
