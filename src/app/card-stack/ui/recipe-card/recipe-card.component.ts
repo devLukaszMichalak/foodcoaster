@@ -22,8 +22,12 @@ export class RecipeCardComponent {
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
   
-  setClickStart(event: MouseEvent) {
+  setMouseClickStart(event: MouseEvent) {
     this.positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
+  }
+  
+  setTouchClickStart(event: TouchEvent) {
+    this.positionService.clickStartPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
   }
   
   getTiltDependedStyle() {

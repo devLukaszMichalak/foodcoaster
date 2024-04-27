@@ -6,7 +6,7 @@ import { PositionService } from './data/position/position.service';
 import { OptionsComponent } from './ui/options/options.component';
 import { RouterOutlet } from '@angular/router';
 import { PickButtonsComponent } from './ui/pick-buttons/pick-buttons.component';
-import { fromEvent, takeUntil, timer } from 'rxjs';
+import { from, fromEvent, mergeMap, takeUntil, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { fadeInDown } from 'ng-animate';
@@ -43,11 +43,13 @@ export class RecipeStackComponent {
   isAnimatingCard = signal<boolean>(false);
   
   constructor() {
-    this.handleMouseMove();
-    this.handleMouseUp();
+    this.registerMouseMoveListener();
+    this.registerTouchMoveListener();
+    
+    this.registerMouseTouchUpListener();
   }
   
-  private handleMouseMove() {
+  private registerMouseMoveListener() {
     fromEvent(document, 'mousemove')
       .pipe(takeUntilDestroyed())
       .subscribe((event: Event) => this.onMouseMove(event as MouseEvent));
@@ -59,13 +61,30 @@ export class RecipeStackComponent {
     }
   }
   
-  private handleMouseUp() {
-    fromEvent(document, 'mouseup')
+  private registerTouchMoveListener() {
+    fromEvent(document, 'touchmove')
       .pipe(takeUntilDestroyed())
-      .subscribe(() => this.onMouseUp());
+      .subscribe((event: Event) => this.onTouchMove(event as TouchEvent));
   }
   
-  private onMouseUp() {
+  private onTouchMove(event: TouchEvent) {
+    if (!this.isAnimatingCard()) {
+      this.positionService.currentPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
+    }
+  }
+  
+  private registerMouseTouchUpListener() {
+    const events = ['touchend', 'mouseup'];
+    from(events)
+      .pipe(
+        mergeMap(eventName => fromEvent(document, eventName)),
+        takeUntilDestroyed()
+      )
+      .subscribe(() => this.onMouseTouchUp());
+    
+  }
+  
+  private onMouseTouchUp() {
     if (this.positionService.isAfterThreshold()) {
       this.nextCard(this.positionService.isAccepted(), this.positionService.currentPosition());
     } else {
