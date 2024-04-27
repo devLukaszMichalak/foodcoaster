@@ -3,13 +3,17 @@ import { NgStyle } from '@angular/common';
 import { PositionService } from '../../data/position/position.service';
 import { WindowService } from '../../data/window/window.service';
 import { Recipe } from '../../data/recipe/recipe.service';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { heroPhoto } from '@ng-icons/heroicons/outline';
 
 @Component({
   selector: 'app-recipe-card',
   standalone: true,
   imports: [
-    NgStyle
+    NgStyle,
+    NgIconComponent
   ],
+  providers: [provideIcons({heroPhoto})],
   templateUrl: './recipe-card.component.html',
   styleUrl: './recipe-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

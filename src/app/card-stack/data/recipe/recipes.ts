@@ -16,5 +16,9 @@ export const recipes: Recipe[] = [
   {
     imgUrl: 'assets/images/439914843_829133185908479_8509747142550053271_n.jpg',
     name: 'Warzywa azjatyckie'
-  }
+  },
+  {
+    imgUrl: '',
+    name: 'Kotlety sojowe'
+  },
 ];

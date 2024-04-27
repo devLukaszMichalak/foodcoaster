@@ -2,6 +2,12 @@
      [ngStyle]="getTiltDependedStyle()"
      (mousedown)="setMouseClickStart($event)"
      (touchstart)="setTouchClickStart($event)">
-    <img [src]="recipe().imgUrl" [alt]="recipe().name" class="pointer-events-none size-full rounded-xl object-cover">
+    @if (!!recipe().imgUrl) {
+        <img [src]="recipe().imgUrl" [alt]="recipe().name"
+             class="pointer-events-none size-full rounded-xl object-cover">
+
+    } @else {
+        <ng-icon name="heroPhoto" size="8rem"></ng-icon>
+    }
     <div class="text-gray-100 absolute bottom-0 w-full rounded-b-xl bg-gradient-to-t from-black from-10% to-transparent px-2 pb-3 pt-8 font-bold capitalize opacity-90 dark:from-teal-100">{{ recipe().name }}</div>
 </div>
