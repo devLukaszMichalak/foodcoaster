@@ -74,7 +74,7 @@ export class RecipeStackComponent {
   }
   
   private registerMouseTouchUpListener() {
-    const events = ['touchend', 'mouseup'];
+    const events = ['touchend', 'touchcancel', 'mouseup'];
     from(events)
       .pipe(
         mergeMap(eventName => fromEvent(document, eventName)),
@@ -85,10 +85,12 @@ export class RecipeStackComponent {
   }
   
   private onMouseTouchUp() {
-    if (this.positionService.isAfterThreshold()) {
-      this.nextCard(this.positionService.isAccepted(), this.positionService.currentPosition());
-    } else {
-      this.positionService.reset();
+    if (!this.isAnimatingCard()) {
+      if (this.positionService.isAfterThreshold()) {
+        this.nextCard(this.positionService.isAccepted(), this.positionService.currentPosition());
+      } else {
+        this.positionService.reset();
+      }
     }
   }
   

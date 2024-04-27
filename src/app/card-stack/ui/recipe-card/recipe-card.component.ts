@@ -17,17 +17,22 @@ import { Recipe } from '../../data/recipe/recipe.service';
 export class RecipeCardComponent {
   
   index = input.required<number>();
+  isAnimating = input.required<boolean>();
   recipe = input.required<Recipe>();
   
   private positionService = inject(PositionService);
   private windowService = inject(WindowService);
   
   setMouseClickStart(event: MouseEvent) {
-    this.positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
+    if (!this.isAnimating()) {
+      this.positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
+    }
   }
   
   setTouchClickStart(event: TouchEvent) {
-    this.positionService.clickStartPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
+    if (!this.isAnimating()) {
+      this.positionService.clickStartPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
+    }
   }
   
   getTiltDependedStyle() {

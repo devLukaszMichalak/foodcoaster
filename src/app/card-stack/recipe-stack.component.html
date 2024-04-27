@@ -3,6 +3,7 @@
 <div class="flex size-full flex-col items-center justify-center" [@fadeInDown]>
     @for (recipe of recipes(); track recipe) {
         <app-recipe-card [ngStyle]="{'z-index': $count - $index}"
+                         [isAnimating]="isAnimatingCard()"
                          [index]="$index"
                          [recipe]="recipe"
                          class="absolute z-10"/>
