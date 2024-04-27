@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
 import { RecipeCardComponent } from './ui/recipe-card/recipe-card.component';
 import { Recipe, RecipeService } from './data/recipe/recipe.service';
 import { NgStyle } from '@angular/common';
@@ -39,8 +39,10 @@ export class RecipeStackComponent {
   private positionService = inject(PositionService);
   private windowSize = inject(WindowService).windowSize;
   
-  recipes: Signal<Recipe[]> = this.recipeService.recipes;
+  private recipes: Signal<Recipe[]> = this.recipeService.recipes;
+  
   isAnimatingCard = signal<boolean>(false);
+  recipesToShow = computed(() => this.recipes().slice(0, 3));
   
   constructor() {
     this.registerMouseMoveListener();

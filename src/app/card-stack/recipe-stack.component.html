@@ -1,14 +1,14 @@
 <app-options/>
 
 <div class="flex size-full flex-col items-center justify-center" [@fadeInDown]>
-    @for (recipe of recipes(); track recipe) {
+    @for (recipe of recipesToShow(); track recipe) {
         <app-recipe-card [ngStyle]="{'z-index': $count - $index}"
                          [isAnimating]="isAnimatingCard()"
                          [index]="$index"
                          [recipe]="recipe"
                          class="absolute"/>
     } @empty {
-        <p class="text-gray-800">No more recipes found!</p>
+        <p class="text-gray-800">No more items found!</p>
         <p class="text-gray-800">All hope is lost...</p>
     }
 </div>
