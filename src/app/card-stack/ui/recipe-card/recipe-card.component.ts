@@ -37,7 +37,14 @@ export class RecipeCardComponent {
   
   getTiltDependedStyle() {
     if (this.index() !== 0) {
-      return {boxShadow: '0 0 30px 0 rgba(0, 0, 0, 0.3)'};
+      const scaleValue = 1 / (this.index() + 1) * 1.3;
+      const cardHeight = 384;
+      const innerCardConstDownOffset = 15;
+      
+      return {
+        boxShadow: '0 0 30px 0 rgba(0, 0, 0, 0.3)',
+        transform: `translateY(${(cardHeight - (cardHeight * scaleValue)) / 2 + innerCardConstDownOffset * this.index()}px) scale(${scaleValue})`
+      };
     }
     
     const {x, y} = this.positionService.cardOffset();
