@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, signal, Signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { NgxNightwind } from 'ngx-nightwind';
 import { heroBars3, heroMoon, heroSun, heroXMark } from '@ng-icons/heroicons/outline';
 import { fadeInRight, fadeOutRight, swing } from 'ng-animate';
 import { transition, trigger, useAnimation } from '@angular/animations';
+import { ionEyeOffOutline, ionImageOutline } from '@ng-icons/ionicons';
+import { RecipeService } from '../../data/recipe/recipe.service';
 
 @Component({
   selector: 'app-options',
@@ -11,7 +13,7 @@ import { transition, trigger, useAnimation } from '@angular/animations';
   imports: [
     NgIconComponent
   ],
-  providers: [provideIcons({heroMoon, heroSun, heroBars3, heroXMark})],
+  providers: [provideIcons({heroMoon, heroSun, heroBars3, heroXMark, ionImageOutline, ionEyeOffOutline})],
   templateUrl: './options.component.html',
   styleUrl: './options.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,13 +35,27 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 export class OptionsComponent {
   
   private ngxNightwind = inject(NgxNightwind);
-  
-  private menuDivRef: Signal<ElementRef<HTMLDivElement>> = viewChild.required('dropdownContent');
-  private menuDiv = computed(() => this.menuDivRef().nativeElement);
+  private recipeService = inject(RecipeService);
   
   isMenuOpen = signal<boolean>(false);
   
-  toggleDarkMode = () => this.ngxNightwind.toggle();
+  toggleDarkMode = () => {
+    const metaTag = document.getElementById('themeColorMeta');
+    
+    if (this.ngxNightwind.isDark) {
+      metaTag?.setAttribute('content', '#f0fdfa');
+      this.ngxNightwind.enableLight();
+    } else {
+      metaTag?.setAttribute('content', '#042f2e');
+      this.ngxNightwind.enableDark();
+    }
+  };
+  
+  toggleOnlyImages = () => this.recipeService.toggleImageOnlyMode();
+  
+  toggleMenu() {
+    this.isMenuOpen.update(isOpen => !isOpen);
+  }
   
   getMenuIconName = () =>
     this.isMenuOpen() ? 'heroXMark' : 'heroBars3';
@@ -47,7 +63,7 @@ export class OptionsComponent {
   getDarkModeIconName = () =>
     this.ngxNightwind.isLight ? 'heroMoon' : 'heroSun';
   
-  toggleMenu() {
-    this.isMenuOpen.update(isOpen => !isOpen);
+  getImagesOnlyIconName() {
+    return this.recipeService.isImageOnly() ? 'ionEyeOffOutline' : 'ionImageOutline';
   }
 }

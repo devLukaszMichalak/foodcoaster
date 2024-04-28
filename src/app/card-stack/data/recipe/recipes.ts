@@ -7,7 +7,7 @@ export const recipes: Recipe[] = [
   },
   {
     imgUrl: 'assets/images/439762954_835935231671136_6328973457610153309_n.jpg',
-    name: 'Curry'
+    name: 'Curry warzywne'
   },
   {
     imgUrl: 'assets/images/439273274_802815137948777_5345856065112772872_n.jpg',
@@ -21,4 +21,52 @@ export const recipes: Recipe[] = [
     imgUrl: '',
     name: 'Kotlety sojowe'
   },
+  {
+    imgUrl: 'assets/images/439928476_1121524149130387_5619094370156480595_n.jpg',
+    name: 'Curry z kurczakiem'
+  },
+  {
+    imgUrl: '',
+    name: 'Chłopski garnek'
+  },
+  {
+    imgUrl: '',
+    name: 'Tortille meksykańskie'
+  },
+  {
+    imgUrl: '',
+    name: 'Ryż z warzywami meksykańskimi i jajkiem'
+  },
+  {
+    imgUrl: '',
+    name: 'Makaron ze szpinakiem i pieczarkami'
+  },
+  {
+    imgUrl: '',
+    name: 'Sałatka z kurczakiem'
+  },
+  {
+    imgUrl: '',
+    name: 'Pielmieni'
+  },
+  {
+    imgUrl: '',
+    name: 'Tajski ryż z mięsem mielonym'
+  },
+  {
+    imgUrl: '',
+    name: 'Udka z kurczaka'
+  },
+  {
+    imgUrl: 'assets/images/439762954_1381730199198541_7794970896435507327_n.jpg',
+    name: 'Burger'
+  },
+  {
+    imgUrl: 'assets/images/439515552_734369925566810_8601495584278751283_n.jpg',
+    name: 'Leczo z pomidorami'
+  },
+  {
+    imgUrl: '',
+    name: 'Leczo bez pomidorów'
+  }
 ];

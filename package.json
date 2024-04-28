@@ -22,7 +22,7 @@
     "@angular/service-worker": "^17.3.5",
     "@ng-icons/core": "^27.3.1",
     "@ng-icons/heroicons": "^27.3.1",
-    "@tailwindcss/container-queries": "^0.1.1",
+    "@ng-icons/ionicons": "^27.3.1",
     "array-shuffle": "^3.0.0",
     "ng-animate": "^2.0.1",
     "ngx-nightwind": "^17.1.3",

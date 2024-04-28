@@ -1,8 +1,8 @@
 {
   "name": "Foodcoaster",
   "short_name": "Foodcoaster",
-  "theme_color": "#fff895",
-  "background_color": "#fff895",
+  "theme_color": "#f0fdfa",
+  "background_color": "#f0fdfa",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
