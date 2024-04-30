@@ -38,6 +38,8 @@ export class OptionsComponent {
   private recipeService = inject(RecipeService);
   
   isMenuOpen = signal<boolean>(false);
+  isDarkMode = () => this.ngxNightwind.isDark;
+  isImageOnly = this.recipeService.isImageOnly;
   
   toggleDarkMode = () => {
     const metaTag = document.getElementById('themeColorMeta');
@@ -53,9 +55,7 @@ export class OptionsComponent {
   
   toggleOnlyImages = () => this.recipeService.toggleImageOnlyMode();
   
-  toggleMenu() {
-    this.isMenuOpen.update(isOpen => !isOpen);
-  }
+  toggleMenu = () => this.isMenuOpen.update(isOpen => !isOpen);
   
   getMenuIconName = () =>
     this.isMenuOpen() ? 'heroXMark' : 'heroBars3';
@@ -64,6 +64,6 @@ export class OptionsComponent {
     this.ngxNightwind.isLight ? 'heroMoon' : 'heroSun';
   
   getImagesOnlyIconName() {
-    return this.recipeService.isImageOnly() ? 'ionEyeOffOutline' : 'ionImageOutline';
+    return this.isImageOnly() ? 'ionEyeOffOutline' : 'ionImageOutline';
   }
 }

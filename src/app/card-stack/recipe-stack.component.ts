@@ -6,12 +6,10 @@ import { PositionService } from './data/position/position.service';
 import { OptionsComponent } from './ui/options/options.component';
 import { RouterOutlet } from '@angular/router';
 import { PickButtonsComponent } from './ui/pick-buttons/pick-buttons.component';
-import { from, fromEvent, mergeMap, takeUntil, timer } from 'rxjs';
+import { filter, first, from, fromEvent, mergeMap, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { fadeInDown } from 'ng-animate';
-import { Position } from './data/position/position';
-import { WindowService } from './data/window/window.service';
+import { fadeInDown, fadeInUp, fadeOutLeft, fadeOutRight, flipInY } from 'ng-animate';
 
 @Component({
   selector: 'app-recipe-stack',
@@ -29,6 +27,24 @@ import { WindowService } from './data/window/window.service';
     trigger('fadeInDown', [
         transition(':enter', useAnimation(fadeInDown, {params: {timing: 0.5}}))
       ]
+    ),
+    trigger('fadeInUp', [
+        transition(':enter', useAnimation(fadeInUp, {params: {timing: 0.2}}))
+      ]
+    ),
+    trigger('flipInY', [
+        transition(':enter', useAnimation(flipInY, {params: {timing: 0.5}}))
+      ]
+    ),
+    trigger('rejectClick', [
+        transition('current => reject', useAnimation(fadeOutLeft, {params: {timing: 0.3}})),
+        transition('reject => void', useAnimation(fadeOutLeft, {params: {timing: 0.12}}))
+      ]
+    ),
+    trigger('acceptClick', [
+        transition('current => accept', useAnimation(fadeOutRight, {params: {timing: 0.3}})),
+        transition('accept => void', useAnimation(fadeOutRight, {params: {timing: 0.12}}))
+      ]
     )
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,11 +53,12 @@ export class RecipeStackComponent {
   
   private recipeService = inject(RecipeService);
   private positionService = inject(PositionService);
-  private windowSize = inject(WindowService).windowSize;
   
   private recipes: Signal<Recipe[]> = this.recipeService.recipes;
   
-  isAnimatingCard = signal<boolean>(false);
+  currentCardStatus = signal<CurrentCardStatus>('current');
+  isAnimatingCard = computed(() => this.currentCardStatus() !== 'current');
+  
   recipesToShow = computed(() => this.recipes().slice(0, 3));
   
   constructor() {
@@ -53,26 +70,28 @@ export class RecipeStackComponent {
   
   private registerMouseMoveListener() {
     fromEvent(document, 'mousemove')
-      .pipe(takeUntilDestroyed())
+      .pipe(
+        filter(() => !this.isAnimatingCard()),
+        takeUntilDestroyed()
+      )
       .subscribe((event: Event) => this.onMouseMove(event as MouseEvent));
   }
   
   private onMouseMove(event: MouseEvent) {
-    if (!this.isAnimatingCard()) {
-      this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
-    }
+    this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
   }
   
   private registerTouchMoveListener() {
     fromEvent(document, 'touchmove')
-      .pipe(takeUntilDestroyed())
+      .pipe(
+        filter(() => !this.isAnimatingCard()),
+        takeUntilDestroyed()
+      )
       .subscribe((event: Event) => this.onTouchMove(event as TouchEvent));
   }
   
   private onTouchMove(event: TouchEvent) {
-    if (!this.isAnimatingCard()) {
-      this.positionService.currentPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
-    }
+    this.positionService.currentPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
   }
   
   private registerMouseTouchUpListener() {
@@ -80,6 +99,9 @@ export class RecipeStackComponent {
     from(events)
       .pipe(
         mergeMap(eventName => fromEvent(document, eventName)),
+        filter(() => !this.isAnimatingCard()),
+        filter(event => !(event.target instanceof HTMLButtonElement)),
+        filter(event => !((event.target as HTMLElement)?.parentElement?.parentElement instanceof HTMLButtonElement)),
         takeUntilDestroyed()
       )
       .subscribe(() => this.onMouseTouchUp());
@@ -87,46 +109,35 @@ export class RecipeStackComponent {
   }
   
   private onMouseTouchUp() {
-    if (!this.isAnimatingCard()) {
-      if (this.positionService.isAfterThreshold()) {
-        this.nextCard(this.positionService.isAccepted(), this.positionService.currentPosition());
-      } else {
-        this.positionService.reset();
-      }
+    if (this.positionService.isAfterThreshold()) {
+      this.nextCard(this.positionService.isAccepted());
+    } else {
+      this.positionService.reset();
     }
   }
   
-  nextCard(isAccepted: boolean, cardPosition: Position) {
-    const moveTimer$ = timer(500);
-    this.isAnimatingCard.set(true);
+  nextCard(isAccepted: boolean) {
+    this.currentCardStatus.set(isAccepted ? 'accept' : 'reject');
     
-    const step = this.windowSize() / 26;
-    
-    timer(0, 10)
-      .pipe(takeUntil(moveTimer$))
-      .subscribe(stepCount => {
-        
-        this.positionService.currentPosition = {
-          x: cardPosition.x + stepCount * step * (isAccepted ? 1 : -1),
-          y: cardPosition.y
-        };
-        
-      })
-      .add(() => {
-        this.isAnimatingCard.set(false);
+    timer(250)
+      .pipe(first())
+      .subscribe(() => {
         this.recipeService.next();
         this.positionService.reset();
+        this.currentCardStatus.set('current');
       });
     
   }
   
-  nextCardEventHandler(event: NextCardEvent) {
-    this.nextCard(event.isAccepted, event.position);
+  getCardState(index: number): CardStatus {
+    if (index > 0) {
+      return 'hold';
+    }
+    
+    return this.currentCardStatus();
   }
-  
 }
 
-export type NextCardEvent = {
-  isAccepted: boolean;
-  position: Position
-}
+type CurrentCardStatus = 'current' | 'reject' | 'accept';
+type CardStatus = CurrentCardStatus | 'hold';
+

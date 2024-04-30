@@ -52,13 +52,13 @@ export class RecipeCardComponent {
     }
     
     const {x, y} = this.positionService.cardOffset();
-    const windowSize = this.windowService.windowSize();
+    const windowWidth = this.windowService.windowWidth();
     
     const translateValue = `translate(${x / 1.2}px, ${y / 1.2}px)`;
-    const rotationAngle = (x / windowSize) * 25;
+    const rotationAngle = (x / windowWidth) * 25;
     const rotationValue = `rotate(${rotationAngle}deg)`;
     
-    const tiltMultiplier = (x > 0 ? x / windowSize : -x / windowSize) * 4;
+    const tiltMultiplier = (x > 0 ? x / windowWidth : -x / windowWidth) * 4;
     
     const shadowRgbaValue = (x > 0 ?
       `${10 * tiltMultiplier}, ${200 * tiltMultiplier}, ${10 * tiltMultiplier}` :

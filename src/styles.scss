@@ -8,14 +8,14 @@
 }
 
 body {
-  @apply absolute top-0 left-0 h-full w-full m-0 p-0 bg-teal-50 overflow-clip;
+  @apply absolute top-0 left-0 h-full w-full m-0 p-0 bg-teal-50 overflow-clip dark:bg-teal-950;
 
   background-image: radial-gradient(#5bd3bf 2px, transparent 2px);
-  background-size: 40px 40px;
+  background-size: 120px 120px;
 
   * {
     @apply tracking-wide;
     font-family: 'Barlow-Regulr', sans-serif;
-    transition: all linear 50ms !important;
+    transition: all linear 80ms, box-shadow 0ms;
   }
 }

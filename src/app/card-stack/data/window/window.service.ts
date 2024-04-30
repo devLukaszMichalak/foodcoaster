@@ -7,7 +7,7 @@ import { fromEvent, map } from 'rxjs';
 })
 export class WindowService {
   
-  windowSize: Signal<number> = toSignal(fromEvent(window, 'resize')
+  windowWidth: Signal<number> = toSignal(fromEvent(window, 'resize')
       .pipe(map(() => window.innerWidth)),
     {initialValue: window.innerWidth}
   );
