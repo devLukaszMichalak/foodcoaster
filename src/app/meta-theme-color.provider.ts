@@ -31,8 +31,8 @@ const initializeThemeColorMeta = () => {
   
   const metaTag = document.getElementById('themeColorMeta');
   if (getInitialColorMode() == 'light') {
-    metaTag?.setAttribute('content', '#f8f9fa');
+    metaTag?.setAttribute('content', '#f0fdfa');
   } else {
-    metaTag?.setAttribute('content', '#2b3035');
+    metaTag?.setAttribute('content', '#042f2e');
   }
 };
