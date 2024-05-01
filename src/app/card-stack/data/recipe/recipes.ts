@@ -68,5 +68,33 @@ export const recipes: Recipe[] = [
   {
     imgUrl: '',
     name: 'Leczo bez pomidorów'
+  },
+  {
+    imgUrl: '',
+    name: 'Pierogi'
+  },
+  {
+    imgUrl: '',
+    name: 'Tortille z kurczakiem i warzywami'
+  },
+  {
+    imgUrl: '',
+    name: 'Makaron z sosem śmietanowym i brokułami'
+  },
+  {
+    imgUrl: '',
+    name: 'Spaghetti bolognese'
+  },
+  {
+    imgUrl: '',
+    name: 'Makaron ze szpinakiem i kurczakiem'
+  },
+  {
+    imgUrl: '',
+    name: 'Ryż z sosem indyjskim'
+  },
+  {
+    imgUrl: '',
+    name: 'Pity gyros'
   }
 ];
