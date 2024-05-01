@@ -96,5 +96,37 @@ export const recipes: Recipe[] = [
   {
     imgUrl: '',
     name: 'Pity gyros'
+  },
+  {
+    imgUrl: '',
+    name: 'Zapiekanka'
+  },
+  {
+    imgUrl: '',
+    name: 'Plendze z cukrem'
+  },
+  {
+    imgUrl: '',
+    name: 'Risotto'
+  },
+  {
+    imgUrl: '',
+    name: 'Chili con carne'
+  },
+  {
+    imgUrl: '',
+    name: 'Chili sin carne'
+  },
+  {
+    imgUrl: '',
+    name: 'Grillowany kurczak'
+  },
+  {
+    imgUrl: '',
+    name: 'Mięso z piekarnika'
+  },
+  {
+    imgUrl: '',
+    name: 'Fasolka po bretońsku'
   }
 ];
