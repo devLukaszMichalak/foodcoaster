@@ -128,5 +128,13 @@ export const recipes: Recipe[] = [
   {
     imgUrl: '',
     name: 'Fasolka po bretońsku'
+  },
+  {
+    imgUrl: '',
+    name: 'Makaron z pesto'
+  },
+  {
+    imgUrl: '',
+    name: 'Kotlety mielone'
   }
 ];
