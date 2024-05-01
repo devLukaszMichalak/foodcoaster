@@ -136,5 +136,9 @@ export const recipes: Recipe[] = [
   {
     imgUrl: '',
     name: 'Kotlety mielone'
+  },
+  {
+    imgUrl: '',
+    name: 'Quesadilla'
   }
 ];
