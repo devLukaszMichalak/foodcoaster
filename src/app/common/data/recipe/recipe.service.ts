@@ -59,4 +59,13 @@ export class RecipeService {
     recipes.shift();
     return [...recipes];
   });
+  
+  reset() {
+    if (this._isImageOnly()) {
+      this._recipes.set(arrayShuffle(recipes.filter(r => r.imgUrl.length > 0)));
+    } else {
+      this._recipes.set(arrayShuffle(recipes));
+    }
+  }
+  
 }

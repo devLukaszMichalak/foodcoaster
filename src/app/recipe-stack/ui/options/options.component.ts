@@ -4,7 +4,7 @@ import { NgxNightwind } from 'ngx-nightwind';
 import { heroBars3, heroMoon, heroSun, heroXMark } from '@ng-icons/heroicons/outline';
 import { fadeInRight, fadeOutRight, swing } from 'ng-animate';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { ionEyeOffOutline, ionImageOutline } from '@ng-icons/ionicons';
+import { ionEyeOffOutline, ionImageOutline, ionRefreshOutline } from '@ng-icons/ionicons';
 import { RecipeService } from '../../../common/data/recipe/recipe.service';
 
 @Component({
@@ -13,7 +13,15 @@ import { RecipeService } from '../../../common/data/recipe/recipe.service';
   imports: [
     NgIconComponent
   ],
-  providers: [provideIcons({heroMoon, heroSun, heroBars3, heroXMark, ionImageOutline, ionEyeOffOutline})],
+  providers: [provideIcons({
+    heroMoon,
+    heroSun,
+    heroBars3,
+    heroXMark,
+    ionImageOutline,
+    ionEyeOffOutline,
+    ionRefreshOutline
+  })],
   templateUrl: './options.component.html',
   styleUrl: './options.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,6 +49,8 @@ export class OptionsComponent {
   isDarkMode = () => this.ngxNightwind.isDark;
   isImageOnly = this.recipeService.isImageOnly;
   
+  refreshButtonAnimationOscillator = false;
+  
   toggleDarkMode = () => {
     const metaTag = document.getElementById('themeColorMeta');
     
@@ -54,6 +64,11 @@ export class OptionsComponent {
   };
   
   toggleOnlyImages = () => this.recipeService.toggleImageOnlyMode();
+  
+  resetSwiping = () => {
+    this.recipeService.reset();
+    this.refreshButtonAnimationOscillator = !this.refreshButtonAnimationOscillator;
+  };
   
   toggleMenu = () => this.isMenuOpen.update(isOpen => !isOpen);
   
