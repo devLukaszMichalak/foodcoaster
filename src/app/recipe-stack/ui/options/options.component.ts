@@ -5,7 +5,7 @@ import { heroBars3, heroMoon, heroSun, heroXMark } from '@ng-icons/heroicons/out
 import { fadeInRight, fadeOutRight, swing } from 'ng-animate';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { ionEyeOffOutline, ionImageOutline } from '@ng-icons/ionicons';
-import { RecipeService } from '../../data/recipe/recipe.service';
+import { RecipeService } from '../../../common/data/recipe/recipe.service';
 
 @Component({
   selector: 'app-options',

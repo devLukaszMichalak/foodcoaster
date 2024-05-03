@@ -1,6 +1,6 @@
 <app-options/>
 
-<div [@fadeInDown] class="flex size-full flex-col items-center justify-center">
+<div [@fadeInDown] class="flex w-full h-[90%] flex-col items-center justify-center">
     @for (recipe of recipesToShow(); track recipe) {
         <app-recipe-card [ngStyle]="{'z-index': $count - $index}"
                          [isAnimating]="isAnimatingCard()"

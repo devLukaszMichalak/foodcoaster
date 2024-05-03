@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { NgStyle } from '@angular/common';
 import { PositionService } from '../../data/position/position.service';
 import { WindowService } from '../../data/window/window.service';
-import { Recipe } from '../../data/recipe/recipe.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPhoto } from '@ng-icons/heroicons/outline';
+import { Recipe } from '../../../common/data/recipe/recipe';
 
 @Component({
   selector: 'app-recipe-card',

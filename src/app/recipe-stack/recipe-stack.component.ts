@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
 import { RecipeCardComponent } from './ui/recipe-card/recipe-card.component';
-import { Recipe, RecipeService } from './data/recipe/recipe.service';
 import { NgStyle } from '@angular/common';
 import { PositionService } from './data/position/position.service';
 import { OptionsComponent } from './ui/options/options.component';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { PickButtonsComponent } from './ui/pick-buttons/pick-buttons.component';
 import { filter, first, from, fromEvent, mergeMap, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { fadeInDown, fadeInUp, fadeOutLeft, fadeOutRight, flipInY } from 'ng-animate';
+import { RecipeService } from '../common/data/recipe/recipe.service';
+import { Recipe } from '../common/data/recipe/recipe';
 
 @Component({
   selector: 'app-recipe-stack',
@@ -51,6 +52,8 @@ import { fadeInDown, fadeInUp, fadeOutLeft, fadeOutRight, flipInY } from 'ng-ani
 })
 export class RecipeStackComponent {
   
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
   private recipeService = inject(RecipeService);
   private positionService = inject(PositionService);
   
@@ -122,9 +125,14 @@ export class RecipeStackComponent {
     timer(250)
       .pipe(first())
       .subscribe(() => {
+        const currentRecipe = this.recipes()[0];
         this.recipeService.next();
         this.positionService.reset();
         this.currentCardStatus.set('current');
+        
+        if (isAccepted) {
+          // this.router.navigate([currentRecipe.id], {relativeTo: this.activatedRoute}).then()
+        }
       });
     
   }

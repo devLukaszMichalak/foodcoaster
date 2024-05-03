@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RecipeStackComponent } from './card-stack/recipe-stack.component';
-import { OptionsComponent } from './card-stack/ui/options/options.component';
+import { RecipeStackComponent } from './recipe-stack/recipe-stack.component';
+import { OptionsComponent } from './recipe-stack/ui/options/options.component';
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
-import { RecipeStackComponent } from './card-stack/recipe-stack.component';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
+import { RecipeStackComponent } from './recipe-stack/recipe-stack.component';
 
 export const routes: Routes = [
   {
     path: 'cards',
-    component: RecipeStackComponent
+    component: RecipeStackComponent,
+  },
+  {
+    path: 'cards/:id',
+    component: RecipeDetailsComponent
   },
   {
     path: '',
