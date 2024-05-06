@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build_and_deploy:
     docker:
-      - image: andreysenov/firebase-tools:13.5.1-node-20
+      - image: cimg/node:current
     working_directory: ~/repo
     steps:
       - checkout
@@ -28,7 +28,9 @@ jobs:
           command: echo ${FOOD_KEYS} > keys.json
       - run:
           name: Deploy to Firebase Hosting
-          command: firebase deploy --only hosting
+          command: |
+            sudo npm install -g firebase-tools
+            firebase deploy --only hosting
           environment:
             GOOGLE_APPLICATION_CREDENTIALS: "keys.json"
 
