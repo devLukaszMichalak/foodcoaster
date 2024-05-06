@@ -7,19 +7,19 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - restore_cache:
-          name: Restore cache
-          keys:
-            - npm-cache-{{ checksum "package-lock.json" }}
-            - npm-cache-
+#      - restore_cache:
+#          name: Restore cache
+#          keys:
+#            - npm-cache-{{ checksum "package-lock.json" }}
+#            - npm-cache-
       - run:
           name: Install dependencies
-          command: npm install --package-lock
-      - save_cache:
-          name: Save cache
-          key: npm-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ~/.npm
+          command: npm i
+#      - save_cache:
+#          name: Save cache
+#          key: npm-cache-{{ checksum "package-lock.json" }}
+#          paths:
+#            - ~/.npm
       - run:
           name: Build project
           command: npm run build

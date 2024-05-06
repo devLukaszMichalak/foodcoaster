@@ -116,7 +116,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 10,
-    imgUrl: '',
+    imgUrl: 'assets/images/441248285_1003993341092733_5670809393347480052_n.jpg',
     name: 'Makaron ze szpinakiem i pieczarkami',
     description: 'Makaron podawany z duszonym szpinakiem, pieczarkami i aromatycznymi przyprawami.',
     instructions: [
@@ -409,7 +409,7 @@ export const recipes: Recipe[] = [
   {
     id: 33,
     imgUrl: '',
-    name: 'Fasolka po bretonsku',
+    name: 'Fasolka po bretońsku',
     description: 'Klasyczne danie kuchni bretońskiej składające się z fasolki szparagowej gotowanej z cebulą, pomidorami i kawałkami boczku.',
     instructions: [
       'Umyć i pokroić fasolkę szparagową oraz cebulę.',
