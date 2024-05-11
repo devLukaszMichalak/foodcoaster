@@ -8,7 +8,7 @@ import { Recipe } from './recipe';
 })
 export class RecipeService {
   
-  private _recipes = signal<Recipe[]>((() => {
+  private _currentRecipes = signal<Recipe[]>(((): Recipe[] => {
     const isImageOnlyLocalStorage = localStorage.getItem('_isImageOnly') === 'true';
     
     if (isImageOnlyLocalStorage) {
@@ -19,7 +19,7 @@ export class RecipeService {
   })());
   
   private _isImageOnly = computed(() =>
-    this._recipes().every(r => r.imgUrl.length > 0));
+    this._currentRecipes().every(r => r.imgUrl.length > 0));
   
   constructor() {
     effect(() => {
@@ -32,14 +32,14 @@ export class RecipeService {
   }
   
   getById(id: number): Recipe | undefined {
-    return this._recipes().find(recipe => recipe.id === id);
+    return recipes.find(recipe => recipe.id === id);
   }
   
-  get recipes(): Signal<Recipe[]> {
-    return computed(() => this._recipes());
+  get currentRecipes(): Signal<Recipe[]> {
+    return computed(() => this._currentRecipes());
   }
   
-  toggleImageOnlyMode() {
+  toggleImageOnlyMode(): void {
     if (this.isImageOnly()) {
       this.everyRecipeMode();
     } else {
@@ -48,23 +48,23 @@ export class RecipeService {
   }
   
   private onlyWithImagesMode = (): void => {
-    this._recipes.update(recipes => recipes.filter(r => r.imgUrl.length > 0));
+    this._currentRecipes.update(recipes => recipes.filter(r => r.imgUrl.length > 0));
   };
   
-  private everyRecipeMode = () => {
-    this._recipes.set(arrayShuffle(recipes));
+  private everyRecipeMode = (): void => {
+    this._currentRecipes.set(arrayShuffle(recipes));
   };
   
-  next = (): void => this._recipes.update((recipes: Recipe[]) => {
+  next = (): void => this._currentRecipes.update((recipes: Recipe[]) => {
     recipes.shift();
     return [...recipes];
   });
   
-  reset() {
+  reset(): void {
     if (this._isImageOnly()) {
-      this._recipes.set(arrayShuffle(recipes.filter(r => r.imgUrl.length > 0)));
+      this._currentRecipes.set(arrayShuffle(recipes.filter(r => r.imgUrl.length > 0)));
     } else {
-      this._recipes.set(arrayShuffle(recipes));
+      this._currentRecipes.set(arrayShuffle(recipes));
     }
   }
   

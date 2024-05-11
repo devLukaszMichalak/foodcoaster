@@ -6,7 +6,7 @@ import { WindowService } from '../../data/window/window.service';
 import { NgxNightwind } from 'ngx-nightwind';
 import { heroHeart, heroXMark } from '@ng-icons/heroicons/outline';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { fadeInLeft, fadeInRight, rubberBand, wobble } from 'ng-animate';
+import { fadeInUp, rubberBand, wobble } from 'ng-animate';
 
 @Component({
   selector: 'app-pick-buttons',
@@ -25,12 +25,8 @@ import { fadeInLeft, fadeInRight, rubberBand, wobble } from 'ng-animate';
     trigger('wobble', [
       transition('false => true, true => false', useAnimation(wobble, {params: {timing: 0.5}}))]
     ),
-    trigger('enterFadeLeft', [
-        transition(':enter', useAnimation(fadeInLeft, {params: {timing: 0.5}}))]
-    ),
-    trigger('enterFadeRight', [
-        transition(':enter', useAnimation(fadeInRight, {params: {timing: 0.5}}))
-      ]
+    trigger('fadeUp', [
+      transition(':enter', useAnimation(fadeInUp, {params: {timing: 0.5}}))]
     )
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

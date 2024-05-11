@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { NgxNightwind } from 'ngx-nightwind';
 import { heroBars3, heroMoon, heroSun, heroXMark } from '@ng-icons/heroicons/outline';
-import { fadeInRight, fadeOutRight, swing } from 'ng-animate';
+import { fadeInDown, fadeInRight, fadeOutRight, swing } from 'ng-animate';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { ionEyeOffOutline, ionImageOutline, ionRefreshOutline } from '@ng-icons/ionicons';
 import { RecipeService } from '../../../common/data/recipe/recipe.service';
@@ -34,8 +34,8 @@ import { RecipeService } from '../../../common/data/recipe/recipe.service';
         transition(':leave', useAnimation(fadeOutRight, {params: {timing: 0.2}}))
       ]
     ),
-    trigger('enterFadeRight', [
-        transition(':enter', useAnimation(fadeInRight, {params: {timing: 0.5}}))
+    trigger('fadeDown', [
+        transition(':enter', useAnimation(fadeInDown, {params: {timing: 0.5}}))
       ]
     )
   ]

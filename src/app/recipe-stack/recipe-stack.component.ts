@@ -33,18 +33,20 @@ import { Recipe } from '../common/data/recipe/recipe';
         transition(':enter', useAnimation(fadeInUp, {params: {timing: 0.2}}))
       ]
     ),
+    trigger('fadeOutLeft', [
+        transition(':leave', useAnimation(fadeOutLeft, {params: {timing: 0.5}}))
+      ]
+    ),
     trigger('flipInY', [
         transition(':enter', useAnimation(flipInY, {params: {timing: 0.5}}))
       ]
     ),
     trigger('rejectClick', [
-        transition('current => reject', useAnimation(fadeOutLeft, {params: {timing: 0.3}})),
-        transition('reject => void', useAnimation(fadeOutLeft, {params: {timing: 0.12}}))
+        transition('current => reject', useAnimation(fadeOutLeft, {params: {timing: 0.4}}))
       ]
     ),
     trigger('acceptClick', [
-        transition('current => accept', useAnimation(fadeOutRight, {params: {timing: 0.3}})),
-        transition('accept => void', useAnimation(fadeOutRight, {params: {timing: 0.12}}))
+        transition('current => accept', useAnimation(fadeOutRight, {params: {timing: 0.4}}))
       ]
     )
   ],
@@ -57,12 +59,15 @@ export class RecipeStackComponent {
   private recipeService = inject(RecipeService);
   private positionService = inject(PositionService);
   
-  private recipes: Signal<Recipe[]> = this.recipeService.recipes;
+  private currentRecipes: Signal<Recipe[]> = this.recipeService.currentRecipes;
   
   currentCardStatus = signal<CurrentCardStatus>('current');
   isAnimatingCard = computed(() => this.currentCardStatus() !== 'current');
   
-  recipesToShow = computed(() => this.recipes().slice(0, 3));
+  animateOut = false;
+  hideCardForAnimateOut = false;
+  
+  recipesToShow = computed(() => this.currentRecipes().slice(0, 3));
   
   constructor() {
     this.registerMouseMoveListener();
@@ -121,20 +126,30 @@ export class RecipeStackComponent {
   
   nextCard(isAccepted: boolean) {
     this.currentCardStatus.set(isAccepted ? 'accept' : 'reject');
+    if (isAccepted) {
+      this.hideCardForAnimateOut = true;
+    }
     
-    timer(250)
+    timer(350)
       .pipe(first())
       .subscribe(() => {
-        const currentRecipe = this.recipes()[0];
+        const currentRecipe = this.currentRecipes()[0];
         this.recipeService.next();
         this.positionService.reset();
         this.currentCardStatus.set('current');
-        
+
         if (isAccepted) {
-          // this.router.navigate([currentRecipe.id], {relativeTo: this.activatedRoute}).then()
+          this.performAnimateOut(currentRecipe);
         }
       });
     
+  }
+  
+  private performAnimateOut(currentRecipe: Recipe) {
+    this.animateOut = true;
+    timer(500).pipe(first()).subscribe(() => {
+      this.router.navigate([currentRecipe.id], {relativeTo: this.activatedRoute}).then();
+    });
   }
   
   getCardState(index: number): CardStatus {
