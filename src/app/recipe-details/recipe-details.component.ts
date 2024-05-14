@@ -64,5 +64,4 @@ export class RecipeDetailsComponent {
       .subscribe(() => this.#router.navigate(['cards']).then());
   }
   
-  protected readonly console = console;
 }

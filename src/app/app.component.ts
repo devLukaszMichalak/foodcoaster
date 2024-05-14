@@ -32,6 +32,6 @@ export class AppComponent implements OnInit {
       });
   }
   
-  handleConfettiEnd = (event: unknown) => this.showConfetti.set(false);
+  handleConfettiEnd = () => this.showConfetti.set(false);
   
 }
