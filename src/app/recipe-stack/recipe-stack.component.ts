@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal, Signal } from '@angular/core';
 import { RecipeCardComponent } from './ui/recipe-card/recipe-card.component';
 import { NgStyle } from '@angular/common';
 import { PositionService } from './data/position/position.service';
@@ -11,6 +11,7 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { fadeInDown, fadeInUp, fadeOutLeft, fadeOutRight, flipInY } from 'ng-animate';
 import { RecipeService } from '../common/data/recipe/recipe.service';
 import { Recipe } from '../common/data/recipe/recipe';
+import { ConfettiService } from '../common/data/confetti/confetti.service';
 
 @Component({
   selector: 'app-recipe-stack',
@@ -52,14 +53,16 @@ import { Recipe } from '../common/data/recipe/recipe';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecipeStackComponent {
+export class RecipeStackComponent implements OnInit {
   
-  private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
-  private recipeService = inject(RecipeService);
-  private positionService = inject(PositionService);
+  #router = inject(Router);
+  #activatedRoute = inject(ActivatedRoute);
+  #recipeService = inject(RecipeService);
+  #positionService = inject(PositionService);
+  #confettiService = inject(ConfettiService);
+  #destroyRef = inject(DestroyRef);
   
-  private currentRecipes: Signal<Recipe[]> = this.recipeService.currentRecipes;
+  #currentRecipes: Signal<Recipe[]> = this.#recipeService.currentRecipes;
   
   currentCardStatus = signal<CurrentCardStatus>('current');
   isAnimatingCard = computed(() => this.currentCardStatus() !== 'current');
@@ -67,42 +70,42 @@ export class RecipeStackComponent {
   animateOut = false;
   hideCardForAnimateOut = false;
   
-  recipesToShow = computed(() => this.currentRecipes().slice(0, 3));
+  recipesToShow = computed(() => this.#currentRecipes().slice(0, 3));
   
-  constructor() {
-    this.registerMouseMoveListener();
-    this.registerTouchMoveListener();
+  ngOnInit() {
+    this.#registerMouseMoveListener();
+    this.#registerTouchMoveListener();
     
-    this.registerMouseTouchUpListener();
+    this.#registerMouseTouchUpListener();
   }
   
-  private registerMouseMoveListener() {
+  #registerMouseMoveListener() {
     fromEvent(document, 'mousemove')
       .pipe(
         filter(() => !this.isAnimatingCard()),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.#destroyRef)
       )
-      .subscribe((event: Event) => this.onMouseMove(event as MouseEvent));
+      .subscribe((event: Event) => this.#onMouseMove(event as MouseEvent));
   }
   
-  private onMouseMove(event: MouseEvent) {
-    this.positionService.currentPosition = {x: event.clientX, y: event.clientY};
+  #onMouseMove(event: MouseEvent) {
+    this.#positionService.currentPosition = {x: event.clientX, y: event.clientY};
   }
   
-  private registerTouchMoveListener() {
+  #registerTouchMoveListener() {
     fromEvent(document, 'touchmove')
       .pipe(
         filter(() => !this.isAnimatingCard()),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.#destroyRef)
       )
-      .subscribe((event: Event) => this.onTouchMove(event as TouchEvent));
+      .subscribe((event: Event) => this.#onTouchMove(event as TouchEvent));
   }
   
-  private onTouchMove(event: TouchEvent) {
-    this.positionService.currentPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
+  #onTouchMove(event: TouchEvent) {
+    this.#positionService.currentPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
   }
   
-  private registerMouseTouchUpListener() {
+  #registerMouseTouchUpListener() {
     const events = ['touchend', 'touchcancel', 'mouseup'];
     from(events)
       .pipe(
@@ -110,46 +113,47 @@ export class RecipeStackComponent {
         filter(() => !this.isAnimatingCard()),
         filter(event => !(event.target instanceof HTMLButtonElement)),
         filter(event => !((event.target as HTMLElement)?.parentElement?.parentElement instanceof HTMLButtonElement)),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.#destroyRef)
       )
-      .subscribe(() => this.onMouseTouchUp());
+      .subscribe(() => this.#onMouseTouchUp());
     
   }
   
-  private onMouseTouchUp() {
-    if (this.positionService.isAfterThreshold()) {
-      this.nextCard(this.positionService.isAccepted());
+  #onMouseTouchUp() {
+    if (this.#positionService.isAfterThreshold()) {
+      this.nextCard(this.#positionService.isAccepted());
     } else {
-      this.positionService.reset();
+      this.#positionService.reset();
     }
+  }
+  
+  #performAnimateOut(currentRecipe: Recipe) {
+    this.animateOut = true;
+    timer(500).pipe(first()).subscribe(() => {
+      this.#router.navigate([currentRecipe.id], {relativeTo: this.#activatedRoute}).then();
+    });
   }
   
   nextCard(isAccepted: boolean) {
     this.currentCardStatus.set(isAccepted ? 'accept' : 'reject');
     if (isAccepted) {
       this.hideCardForAnimateOut = true;
+      this.#confettiService.startConfetti();
     }
     
     timer(350)
       .pipe(first())
       .subscribe(() => {
-        const currentRecipe = this.currentRecipes()[0];
-        this.recipeService.next();
-        this.positionService.reset();
+        const currentRecipe = this.#currentRecipes()[0];
+        this.#recipeService.next();
+        this.#positionService.reset();
         this.currentCardStatus.set('current');
-
+        
         if (isAccepted) {
-          this.performAnimateOut(currentRecipe);
+          this.#performAnimateOut(currentRecipe);
         }
       });
     
-  }
-  
-  private performAnimateOut(currentRecipe: Recipe) {
-    this.animateOut = true;
-    timer(500).pipe(first()).subscribe(() => {
-      this.router.navigate([currentRecipe.id], {relativeTo: this.activatedRoute}).then();
-    });
   }
   
   getCardState(index: number): CardStatus {

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, output } f
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { PositionService } from '../../data/position/position.service';
 import { NgStyle } from '@angular/common';
-import { WindowService } from '../../data/window/window.service';
+import { WindowService } from '../../../common/data/window/window.service';
 import { NgxNightwind } from 'ngx-nightwind';
 import { heroHeart, heroXMark } from '@ng-icons/heroicons/outline';
 import { transition, trigger, useAnimation } from '@angular/animations';
@@ -40,35 +40,36 @@ export class PickButtonsComponent {
   acceptButtonAnimationOscillator = false;
   rejectButtonAnimationOscillator = true;
   
-  private positionService = inject(PositionService);
-  private ngxNightwind = inject(NgxNightwind);
-  private windowWidth = inject(WindowService).windowWidth;
+  #positionService = inject(PositionService);
+  #ngxNightwind = inject(NgxNightwind);
+  #windowWidth = inject(WindowService).windowWidth;
   
-  private cardOffset = this.positionService.cardOffset;
-  private isAccepted = this.positionService.isAccepted;
-  private isRejected = this.positionService.isRejected;
+  #cardOffset = this.#positionService.cardOffset;
+  #isAccepted = this.#positionService.isAccepted;
+  #isRejected = this.#positionService.isRejected;
   
-  private isOffsetPositive = computed(() => this.cardOffset().x > 0);
-  private scaleRawValue = computed(() => (this.windowWidth() + Math.abs(this.cardOffset().x)) / this.windowWidth());
-  private scaleValue = computed(() => this.scaleRawValue() >= 1.25 ? 1.25 : this.scaleRawValue());
+  #isOffsetPositive = computed(() => this.#cardOffset().x > 0);
+  #scaleRawValue = computed(() => (this.#windowWidth() + Math.abs(this.#cardOffset().x)) / this.#windowWidth());
+  #scaleValue = computed(() => this.#scaleRawValue() >= 1.25 ? 1.25 : this.#scaleRawValue());
   
-  private acceptScale = computed(() =>
-    ({scale: this.isOffsetPositive() ? this.scaleValue() : 1}));
+  #acceptScale = computed(() =>
+    ({scale: this.#isOffsetPositive() ? this.#scaleValue() : 1}));
   
-  private acceptColor = computed(() =>
-    ({backgroundColor: this.isAccepted() ? (this.ngxNightwind.isLight ? 'rgb(34, 197, 94)' : 'rgb(74, 222, 128)') : ''}));
+  #acceptColor = computed(() =>
+    ({backgroundColor: this.#isAccepted() ? (this.#ngxNightwind.isLight ? 'rgb(34, 197, 94)' : 'rgb(74, 222, 128)') : ''}));
   
   acceptStyle = computed(() =>
-    ({...this.acceptScale(), ...this.acceptColor()}));
+    ({...this.#acceptScale(), ...this.#acceptColor()}));
   
-  private rejectScale = computed(() =>
-    ({scale: !this.isOffsetPositive() ? this.scaleValue() : 1}));
   
-  private rejectColor = computed(() =>
-    ({backgroundColor: this.isRejected() ? (this.ngxNightwind.isLight ? 'rgb(239, 68, 68)' : 'rgb(248, 113, 113)') : ''}));
+  #rejectScale = computed(() =>
+    ({scale: !this.#isOffsetPositive() ? this.#scaleValue() : 1}));
+  
+  #rejectColor = computed(() =>
+    ({backgroundColor: this.#isRejected() ? (this.#ngxNightwind.isLight ? 'rgb(239, 68, 68)' : 'rgb(248, 113, 113)') : ''}));
   
   rejectStyle = computed(() =>
-    ({...this.rejectScale(), ...this.rejectColor()}));
+    ({...this.#rejectScale(), ...this.#rejectColor()}));
   
   reject = () => {
     this.nextCardEvent.emit(false);

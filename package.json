@@ -25,6 +25,7 @@
     "@ng-icons/ionicons": "^27.3.1",
     "array-shuffle": "^3.0.0",
     "ng-animate": "^2.0.1",
+    "ngx-confetti-explosion": "^3.0.1",
     "ngx-nightwind": "^17.1.3",
     "nightwind": "^1.1.13",
     "rxjs": "~7.8.0",

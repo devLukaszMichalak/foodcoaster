@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { PositionService } from '../../data/position/position.service';
-import { WindowService } from '../../data/window/window.service';
+import { WindowService } from '../../../common/data/window/window.service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPhoto } from '@ng-icons/heroicons/outline';
 import { Recipe } from '../../../common/data/recipe/recipe';
@@ -24,18 +24,18 @@ export class RecipeCardComponent {
   isAnimating = input.required<boolean>();
   recipe = input.required<Recipe>();
   
-  private positionService = inject(PositionService);
-  private windowService = inject(WindowService);
+  #positionService = inject(PositionService);
+  #windowService = inject(WindowService);
   
   setMouseClickStart(event: MouseEvent) {
     if (!this.isAnimating()) {
-      this.positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
+      this.#positionService.clickStartPosition = {x: event.clientX, y: event.clientY};
     }
   }
   
   setTouchClickStart(event: TouchEvent) {
     if (!this.isAnimating()) {
-      this.positionService.clickStartPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
+      this.#positionService.clickStartPosition = {x: event.touches[0].clientX, y: event.touches[0].clientY};
     }
   }
   
@@ -51,8 +51,8 @@ export class RecipeCardComponent {
       };
     }
     
-    const {x, y} = this.positionService.cardOffset();
-    const windowWidth = this.windowService.windowWidth();
+    const {x, y} = this.#positionService.cardOffset();
+    const windowWidth = this.#windowService.windowWidth();
     
     const translateValue = `translate(${x / 1.2}px, ${y / 1.2}px)`;
     const rotationAngle = (x / windowWidth) * 25;
@@ -66,9 +66,9 @@ export class RecipeCardComponent {
     
     const shadowValue = `0 0 max(30px,calc(30px * ${tiltMultiplier})) 0 rgba(${shadowRgbaValue}, max(0.3,${tiltMultiplier}))`;
     
-    const isFromAnimatingFromButtons = Math.abs(this.positionService.clickStartPosition().x) === 1;
+    const isFromAnimatingFromButtons = Math.abs(this.#positionService.clickStartPosition().x) === 1;
     
-    const shouldFade = this.positionService.isAfterThreshold() && !isFromAnimatingFromButtons;
+    const shouldFade = this.#positionService.isAfterThreshold() && !isFromAnimatingFromButtons;
     
     const opacityValue = shouldFade ? '0.6' : '1';
     

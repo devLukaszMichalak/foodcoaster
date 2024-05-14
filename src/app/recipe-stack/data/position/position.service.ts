@@ -6,29 +6,29 @@ import { Position } from './position';
 })
 export class PositionService {
   
-  private _currentPosition = signal<Position>({x: 0, y: 0});
-  private _clickStartPosition = signal<Position>({x: 0, y: 0});
+  #currentPosition = signal<Position>({x: 0, y: 0});
+  #clickStartPosition = signal<Position>({x: 0, y: 0});
   
-  private _shouldTrackOffset = computed<boolean>(() =>
-    !!this._currentPosition().x && !!this._currentPosition().y && !!this._clickStartPosition().x && !!this._clickStartPosition().y);
+  #shouldTrackOffset = computed<boolean>(() =>
+    !!this.#currentPosition().x && !!this.#currentPosition().y && !!this.#clickStartPosition().x && !!this.#clickStartPosition().y);
   
-  private _cardOffset = computed<Position>(() => {
-    if (!this._shouldTrackOffset()) {
+  #cardOffset = computed<Position>(() => {
+    if (!this.#shouldTrackOffset()) {
       return {x: 0, y: 0};
     }
     
-    const xOffset = this._currentPosition().x - this._clickStartPosition().x;
-    const yOffset = this._currentPosition().y - this._clickStartPosition().y;
+    const xOffset = this.#currentPosition().x - this.#clickStartPosition().x;
+    const yOffset = this.#currentPosition().y - this.#clickStartPosition().y;
     
     return {x: xOffset, y: yOffset};
   });
   
   get isAccepted(): Signal<boolean> {
-    return computed(() => this._cardOffset().x > window.innerWidth / 4);
+    return computed(() => this.#cardOffset().x > window.innerWidth / 4);
   }
   
   get isRejected(): Signal<boolean> {
-    return computed(() => -this._cardOffset().x > window.innerWidth / 4);
+    return computed(() => -this.#cardOffset().x > window.innerWidth / 4);
   }
   
   get isAfterThreshold(): Signal<boolean> {
@@ -36,22 +36,22 @@ export class PositionService {
   }
   
   get cardOffset(): Signal<Position> {
-    return computed(() => this._cardOffset());
+    return computed(() => this.#cardOffset());
   }
   
   set currentPosition(position: Position) {
-    this._currentPosition.set(position);
+    this.#currentPosition.set(position);
   }
   
   get clickStartPosition(): Signal<Position> {
-    return computed(() => this._clickStartPosition());
+    return computed(() => this.#clickStartPosition());
   }
   
   set clickStartPosition(position: Position) {
-    this._clickStartPosition.set(position);
+    this.#clickStartPosition.set(position);
   }
   
   reset(): void {
-    this._clickStartPosition.set({x: 0, y: 0});
+    this.#clickStartPosition.set({x: 0, y: 0});
   }
 }

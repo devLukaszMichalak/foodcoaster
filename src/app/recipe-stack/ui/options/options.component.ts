@@ -42,31 +42,31 @@ import { RecipeService } from '../../../common/data/recipe/recipe.service';
 })
 export class OptionsComponent {
   
-  private ngxNightwind = inject(NgxNightwind);
-  private recipeService = inject(RecipeService);
+  #ngxNightwind = inject(NgxNightwind);
+  #recipeService = inject(RecipeService);
   
   isMenuOpen = signal<boolean>(false);
-  isDarkMode = () => this.ngxNightwind.isDark;
-  isImageOnly = this.recipeService.isImageOnly;
+  isDarkMode = () => this.#ngxNightwind.isDark;
+  isImageOnly = this.#recipeService.isImageOnly;
   
   refreshButtonAnimationOscillator = false;
   
   toggleDarkMode = () => {
     const metaTag = document.getElementById('themeColorMeta');
     
-    if (this.ngxNightwind.isDark) {
+    if (this.#ngxNightwind.isDark) {
       metaTag?.setAttribute('content', '#f0fdfa');
-      this.ngxNightwind.enableLight();
+      this.#ngxNightwind.enableLight();
     } else {
       metaTag?.setAttribute('content', '#042f2e');
-      this.ngxNightwind.enableDark();
+      this.#ngxNightwind.enableDark();
     }
   };
   
-  toggleOnlyImages = () => this.recipeService.toggleImageOnlyMode();
+  toggleOnlyImages = () => this.#recipeService.toggleImageOnlyMode();
   
   resetSwiping = () => {
-    this.recipeService.reset();
+    this.#recipeService.reset();
     this.refreshButtonAnimationOscillator = !this.refreshButtonAnimationOscillator;
   };
   
@@ -76,7 +76,7 @@ export class OptionsComponent {
     this.isMenuOpen() ? 'heroXMark' : 'heroBars3';
   
   getDarkModeIconName = () =>
-    this.ngxNightwind.isLight ? 'heroMoon' : 'heroSun';
+    this.#ngxNightwind.isLight ? 'heroMoon' : 'heroSun';
   
   getImagesOnlyIconName() {
     return this.isImageOnly() ? 'ionEyeOffOutline' : 'ionImageOutline';

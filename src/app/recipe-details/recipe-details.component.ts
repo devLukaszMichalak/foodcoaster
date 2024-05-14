@@ -24,32 +24,32 @@ import { fadeInDown, fadeInRight, fadeOutRight, swing } from 'ng-animate';
       transition('false => true, true => false', useAnimation(swing, {params: {timing: 0.5}}))]
     ),
     trigger('fadeInTop', [
-        transition(':enter', useAnimation(fadeInDown, {params: {timing: 0.5}})),]
+      transition(':enter', useAnimation(fadeInDown, {params: {timing: 0.5}}))]
     ),
     trigger('fadeInRight', [
-        transition(':enter', useAnimation(fadeInRight, {params: {timing: 0.5}})),]
+      transition(':enter', useAnimation(fadeInRight, {params: {timing: 0.5}}))]
     ),
     trigger('fadeOutRight', [
-        transition(':leave', useAnimation(fadeOutRight, {params: {timing: 0.5}})),]
+      transition(':leave', useAnimation(fadeOutRight, {params: {timing: 0.5}}))]
     )
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipeDetailsComponent {
   
-  private recipeService = inject(RecipeService);
-  private activatedRoute = inject(ActivatedRoute);
-  private router = inject(Router);
+  #recipeService = inject(RecipeService);
+  #activatedRoute = inject(ActivatedRoute);
+  #router = inject(Router);
   
-  private recipeId$: Observable<number> = this.activatedRoute.paramMap
+  #recipeId$: Observable<number> = this.#activatedRoute.paramMap
     .pipe(
       map(params => params.get('id')),
       map(idString => parseInt(idString ?? '')),
       map(id => id ?? -1)
     );
   
-  recipe$: Observable<Recipe | undefined> = this.recipeId$
-    .pipe(map(recipeId => this.recipeService.getById(recipeId)));
+  recipe$: Observable<Recipe | undefined> = this.#recipeId$
+    .pipe(map(recipeId => this.#recipeService.getById(recipeId)));
   
   backButtonAnimationOscillator = false;
   animateOut = false;
@@ -61,6 +61,8 @@ export class RecipeDetailsComponent {
     this.animateOut = true;
     timer(500)
       .pipe(first())
-      .subscribe(() => this.router.navigate(['cards']).then());
+      .subscribe(() => this.#router.navigate(['cards']).then());
   }
+  
+  protected readonly console = console;
 }

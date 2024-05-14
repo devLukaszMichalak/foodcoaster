@@ -12,4 +12,9 @@ export class WindowService {
     {initialValue: window.innerWidth}
   );
   
+  windowHeight: Signal<number> = toSignal(fromEvent(window, 'resize')
+      .pipe(map(() => window.innerHeight)),
+    {initialValue: window.innerHeight}
+  );
+  
 }
