@@ -1,27 +1,14 @@
 # Foodcoaster
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+Foodcoaster is a fun and interactive Angular 17 application designed to help users discover new dinner ideas in a swipeable, Tinder-like interface. This side project aims to make meal planning enjoyable and straightforward by presenting users with a variety of recipes to choose from. Users can swipe right to save a recipe or left to discard it, ensuring they only see meal ideas they are interested in.
 
-## Development server
+Features
+- Swipe Interface: Users can swipe right to save recipes they like or left to discard them.
+- Recipe Details: Detailed recipe instructions and ingredients are provided upon selecting a recipe.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Check it out at https://your-dinner-idea-is-here.web.app
 
-## Code scaffolding
+### App preview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+https://github.com/devLukaszMichalak/foodcoaster/assets/48216995/cf1e942a-2733-4e28-9d78-cb802301a14d
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
