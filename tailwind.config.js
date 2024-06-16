@@ -13,7 +13,8 @@ module.exports = {
         },
     },
     plugins: [
-        require("nightwind")
+        require("nightwind"),
+        require('@tailwindcss/container-queries')
     ],
 }
 
