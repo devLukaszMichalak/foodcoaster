@@ -18,10 +18,11 @@ import { WindowService } from './common/data/window/window.service';
 export class AppComponent implements OnInit {
   
   #destroyRef = inject(DestroyRef);
+  #windowService = inject(WindowService);
   #confettiStart$ = inject(ConfettiService).confettiStart$;
   
-  windowHeight = inject(WindowService).windowHeight;
-  windowWidth = inject(WindowService).windowWidth;
+  windowHeight = this.#windowService.windowHeight;
+  windowWidth = this.#windowService.windowWidth;
   showConfetti: WritableSignal<boolean> = signal(false);
   
   ngOnInit() {
