@@ -34,6 +34,7 @@ import { fadeInUp, rubberBand, wobble } from 'ng-animate';
 export class PickButtonsComponent {
   
   isAnimating = input.required<boolean>();
+  disabled = input<boolean>(false);
   
   nextCardEvent = output<boolean>();
   
@@ -72,11 +73,19 @@ export class PickButtonsComponent {
     ({...this.#rejectScale(), ...this.#rejectColor()}));
   
   reject = () => {
+    if (this.disabled()) {
+      return;
+    }
+    
     this.nextCardEvent.emit(false);
     this.rejectButtonAnimationOscillator = !this.rejectButtonAnimationOscillator;
   };
   
   accept = () => {
+    if (this.disabled()) {
+      return;
+    }
+    
     this.nextCardEvent.emit(true);
     this.acceptButtonAnimationOscillator = !this.acceptButtonAnimationOscillator;
   };

@@ -72,6 +72,8 @@ export class RecipeStackComponent implements OnInit {
   
   recipesToShow = computed(() => this.#currentRecipes().slice(0, 3));
   
+  areAnyRecipesLeft = computed(() => this.recipesToShow().length > 0);
+  
   ngOnInit() {
     this.#registerMouseMoveListener();
     this.#registerTouchMoveListener();

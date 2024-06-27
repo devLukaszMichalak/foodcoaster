@@ -21,6 +21,6 @@
             }
         </div>
 
-        <app-pick-buttons [isAnimating]="isAnimatingCard()" (nextCardEvent)="nextCard($event)"/>
+        <app-pick-buttons [disabled]="!areAnyRecipesLeft()" [isAnimating]="isAnimatingCard()" (nextCardEvent)="nextCard($event)"/>
     </div>
 }
