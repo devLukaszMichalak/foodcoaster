@@ -154,7 +154,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 13,
-    imgUrl: '',
+    imgUrl: 'assets/images/zcZ1nENL.jpg',
     name: 'Tajski ryż z mięsem mielonym',
     description: 'Danie tajskie z ryżu podawanego z pikantnym sosem i mielonym mięsem.',
     instructions: [
@@ -294,7 +294,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 24,
-    imgUrl: '',
+    imgUrl: 'assets/images/TVxsPk2x.jpg',
     name: 'Pity gyros',
     description: 'Popularne danie greckie z mięsem gyros podawanym w pitach z warzywami i sosem tzatziki.',
     instructions: [
@@ -307,7 +307,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 25,
-    imgUrl: '',
+    imgUrl: 'assets/images/pwPa6RYE.jpg',
     name: 'Zapiekanka',
     description: 'Polskie danie składające się z kromki chleba, pokrytej warzywami, mięsem i serem, pieczone w piekarniku.',
     instructions: [
@@ -432,7 +432,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 35,
-    imgUrl: '',
+    imgUrl: 'assets/images/dVnAy2t8.jpg',
     name: 'Kotlety mielone',
     description: 'Klasyczne kotlety mielone z mięsa mielonego, bułki tartej i przypraw, smażone na złoty kolor.',
     instructions: [
