@@ -37,7 +37,7 @@ export const recipes: Recipe[] = [
       'Ugotuj biały ryż według instrukcji na opakowaniu.',
       'Usmaż na patelni cebulę i kiełbasę na maśle. Dodaj kimchi.',
       'Dodaj ugotowany ryż na patelnie i podsmaż.',
-      'Dopraw sosem sojowym i olejem sezamowym. Podawaj z jajkiem sadzonym.',
+      'Dopraw sosem sojowym i olejem sezamowym. Podawaj z jajkiem sadzonym.'
     ]
   },
   {
@@ -452,6 +452,20 @@ export const recipes: Recipe[] = [
       'Przykryj drugą tortillą.',
       'Smaż quesadillę na patelni przez kilka minut z każdej strony, aż będzie chrupiąca i ser się roztopi.'
     ]
+  },
+  {
+    'id': 37,
+    'imgUrl': 'assets/images/l2hhIMNw.jpg',
+    'name': 'Pizza z pepperoni, szpinakiem i pieczarkami',
+    'description': 'Domowa pizza na cienkim cieście z dodatkami takimi jak pepperoni, świeży szpinak, pieczarki, suszone pomidory i cebula.',
+    'instructions': [
+      'Rozgrzej piekarnik do 220°C.',
+      'Nałóż sos pomidorowy na rozwałkowane ciasto do pizzy.',
+      'Dodaj plastry pepperoni, świeże liście szpinaku, pokrojone pieczarki, suszone pomidory i kawałki cebuli.',
+      'Posyp całość serem mozzarella.',
+      'Piec pizzę w nagrzanym piekarniku przez około 12-15 minut, aż ciasto będzie chrupiące, a ser roztopiony i zarumieniony.'
+    ]
   }
+
 ];
 
