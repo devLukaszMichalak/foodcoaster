@@ -465,7 +465,19 @@ export const recipes: Recipe[] = [
       'Posyp całość serem mozzarella.',
       'Piec pizzę w nagrzanym piekarniku przez około 12-15 minut, aż ciasto będzie chrupiące, a ser roztopiony i zarumieniony.'
     ]
-  }
-
+  },
+  {
+    "id": 38,
+    "imgUrl": "assets/images/eJnvC5pH.jpg",
+    "name": "Naleśniki ze szpinakiem i indykiem",
+    "description": "Delikatne naleśniki nadziewane szpinakiem i kawałkami indyka, podane na ciepło.",
+    "instructions": [
+      "Przygotuj ciasto naleśnikowe z mąki, jajek, mleka i wody. Odstaw na chwilę, aby odpoczęło.",
+      "Na rozgrzanej patelni usmaż cienkie naleśniki z obu stron na złoty kolor.",
+      "Na osobnej patelni podsmaż szpinak i dodaj kawałki indyka. Dopraw do smaku solą, pieprzem i czosnkiem.",
+      "Nałóż farsz ze szpinaku i indyka na naleśniki, a następnie złóż je w trójkąty lub zawiń w rulony.",
+      "Podawaj na ciepło, opcjonalnie z dodatkiem sosu czosnkowego lub jogurtowego."
+    ]
+  },
 ];
 
