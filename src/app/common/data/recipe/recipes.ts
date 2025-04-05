@@ -255,7 +255,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 21,
-    imgUrl: '',
+    imgUrl: 'assets/images/TnmIl88g.jpg',
     name: 'Spaghetti bolognese',
     description: 'Klasyczne włoskie danie z makaronem spaghetti podawanym z mięsnym sosem pomidorowym.',
     instructions: [
@@ -330,32 +330,32 @@ export const recipes: Recipe[] = [
       'Posypać wszystko startym serem i zapiekać w piekarniku aż ser się roztopi i zrumieni.'
     ]
   },
-  {
-    id: 27,
-    imgUrl: '',
-    name: 'Plendze z cukrem',
-    description: 'Swojsaka nazwa na placki ziemniaczane podsmażane na patelni i posypane cukrem.',
-    instructions: [
-      'Ziemniaki obrać i zetrzeć na tarce o drobnych oczkach.',
-      'Odcisnąć nadmiar wody z ziemniaków za pomocą sitka lub ręcznika papierowego.',
-      'Dodać do ziemniaków sól.',
-      'Na patelni rozgrzać olej lub rozpuszczony tłuszcz, a następnie formować placki ziemniaczane za pomocą łyżki i smażyć na złocisty kolor z obu stron.',
-      'Gorące placki posypać cukrem przed podaniem.'
-    ]
-  },
-  {
-    id: 28,
-    imgUrl: '',
-    name: 'Risotto',
-    description: 'Włoskie danie z ryżu, gotowane na wywarze z dodatkiem masła, sera parmezan i aromatycznych przypraw.',
-    instructions: [
-      'Podgrzej bulion na patelni.',
-      'Na drugiej patelni podsmaż cebulę i czosnek.',
-      'Dodaj ryż i smaż przez kilka minut.',
-      'Dodawaj bulion po trochu do ryżu, mieszając często, aż ryż wchłonie cały płyn.',
-      'Gdy ryż będzie gotowy, dodaj masło, parmezan i przyprawy, wymieszaj dobrze i podawaj natychmiast.'
-    ]
-  },
+  // {
+  //   id: 27,
+  //   imgUrl: '',
+  //   name: 'Plendze z cukrem',
+  //   description: 'Swojsaka nazwa na placki ziemniaczane podsmażane na patelni i posypane cukrem.',
+  //   instructions: [
+  //     'Ziemniaki obrać i zetrzeć na tarce o drobnych oczkach.',
+  //     'Odcisnąć nadmiar wody z ziemniaków za pomocą sitka lub ręcznika papierowego.',
+  //     'Dodać do ziemniaków sól.',
+  //     'Na patelni rozgrzać olej lub rozpuszczony tłuszcz, a następnie formować placki ziemniaczane za pomocą łyżki i smażyć na złocisty kolor z obu stron.',
+  //     'Gorące placki posypać cukrem przed podaniem.'
+  //   ]
+  // },
+  // {
+  //   id: 28,
+  //   imgUrl: '',
+  //   name: 'Risotto',
+  //   description: 'Włoskie danie z ryżu, gotowane na wywarze z dodatkiem masła, sera parmezan i aromatycznych przypraw.',
+  //   instructions: [
+  //     'Podgrzej bulion na patelni.',
+  //     'Na drugiej patelni podsmaż cebulę i czosnek.',
+  //     'Dodaj ryż i smaż przez kilka minut.',
+  //     'Dodawaj bulion po trochu do ryżu, mieszając często, aż ryż wchłonie cały płyn.',
+  //     'Gdy ryż będzie gotowy, dodaj masło, parmezan i przyprawy, wymieszaj dobrze i podawaj natychmiast.'
+  //   ]
+  // },
   {
     id: 29,
     imgUrl: '',
@@ -381,31 +381,31 @@ export const recipes: Recipe[] = [
       'Podawaj z ugotowanym ryżem lub bułką.'
     ]
   },
-  {
-    id: 31,
-    imgUrl: '',
-    name: 'Grillowany kurczak',
-    description: 'Kawałki kurczaka grillowane na ruszcie lub patelni, aromatyczne i soczyste.',
-    instructions: [
-      'Przygotuj marynatę z oliwy, czosnku, przypraw i ziół.',
-      'Natrzyj kawałki kurczaka marynatą i odstaw na minimum 30 minut do lodówki.',
-      'Rozgrzej grill lub patelnię.',
-      'Grilluj kawałki kurczaka z obu stron, aż będą chrupiące i dobrze ugotowane w środku.'
-    ]
-  },
-  {
-    id: 32,
-    imgUrl: '',
-    name: 'Mięso z piekarnika',
-    description: 'Danie z mięsa pieczonego w piekarniku z dodatkiem ziół i przypraw, aromatyczne i soczyste.',
-    instructions: [
-      'Przygotuj marynatę z oliwy, czosnku, przypraw i ziół.',
-      'Natrzyj kawałki mięsa marynatą i odstaw na minimum 30 minut do lodówki.',
-      'Przygotuj ulubione warzywa takie jak marchew, cebula, papryka.',
-      'Rozgrzej piekarnik do temperatury 180°C.',
-      'Ułóż kawałki mięsa i warzyw w naczyniu żaroodpornym i piecz przez około godzinę, aż będą chrupiące i dobrze ugotowane w środku.'
-    ]
-  },
+  // {
+  //   id: 31,
+  //   imgUrl: '',
+  //   name: 'Grillowany kurczak',
+  //   description: 'Kawałki kurczaka grillowane na ruszcie lub patelni, aromatyczne i soczyste.',
+  //   instructions: [
+  //     'Przygotuj marynatę z oliwy, czosnku, przypraw i ziół.',
+  //     'Natrzyj kawałki kurczaka marynatą i odstaw na minimum 30 minut do lodówki.',
+  //     'Rozgrzej grill lub patelnię.',
+  //     'Grilluj kawałki kurczaka z obu stron, aż będą chrupiące i dobrze ugotowane w środku.'
+  //   ]
+  // },
+  // {
+  //   id: 32,
+  //   imgUrl: '',
+  //   name: 'Mięso z piekarnika',
+  //   description: 'Danie z mięsa pieczonego w piekarniku z dodatkiem ziół i przypraw, aromatyczne i soczyste.',
+  //   instructions: [
+  //     'Przygotuj marynatę z oliwy, czosnku, przypraw i ziół.',
+  //     'Natrzyj kawałki mięsa marynatą i odstaw na minimum 30 minut do lodówki.',
+  //     'Przygotuj ulubione warzywa takie jak marchew, cebula, papryka.',
+  //     'Rozgrzej piekarnik do temperatury 180°C.',
+  //     'Ułóż kawałki mięsa i warzyw w naczyniu żaroodpornym i piecz przez około godzinę, aż będą chrupiące i dobrze ugotowane w środku.'
+  //   ]
+  // },
   {
     id: 33,
     imgUrl: '',
@@ -441,18 +441,18 @@ export const recipes: Recipe[] = [
       'Smaż kotlety na rozgrzanej patelni z obu stron, aż będą złociste i dobrze ugotowane w środku.'
     ]
   },
-  {
-    id: 36,
-    imgUrl: '',
-    name: 'Quesadilla',
-    description: 'Meksykańskie danie z tortilli nadziewanej serem i innymi składnikami, grillowane na patelni do chrupkości.',
-    instructions: [
-      'Podgrzej patelnię na średnim ogniu.',
-      'Nałóż na tortillę warstwę sera, a następnie dodaj ulubione składniki, takie jak kurczak, papryka, cebula.',
-      'Przykryj drugą tortillą.',
-      'Smaż quesadillę na patelni przez kilka minut z każdej strony, aż będzie chrupiąca i ser się roztopi.'
-    ]
-  },
+  // {
+  //   id: 36,
+  //   imgUrl: '',
+  //   name: 'Quesadilla',
+  //   description: 'Meksykańskie danie z tortilli nadziewanej serem i innymi składnikami, grillowane na patelni do chrupkości.',
+  //   instructions: [
+  //     'Podgrzej patelnię na średnim ogniu.',
+  //     'Nałóż na tortillę warstwę sera, a następnie dodaj ulubione składniki, takie jak kurczak, papryka, cebula.',
+  //     'Przykryj drugą tortillą.',
+  //     'Smaż quesadillę na patelni przez kilka minut z każdej strony, aż będzie chrupiąca i ser się roztopi.'
+  //   ]
+  // },
   {
     'id': 37,
     'imgUrl': 'assets/images/l2hhIMNw.jpg',
@@ -478,6 +478,150 @@ export const recipes: Recipe[] = [
       "Nałóż farsz ze szpinaku i indyka na naleśniki, a następnie złóż je w trójkąty lub zawiń w rulony.",
       "Podawaj na ciepło, opcjonalnie z dodatkiem sosu czosnkowego lub jogurtowego."
     ]
+  },
+  {
+    "id": 39,
+    "imgUrl": "",
+    "name": "Papryka faszerowana",
+    "description": "Papryka nadziewana mięsem mielonym, ryżem i warzywami, zapiekana w piekarniku.",
+    "instructions": [
+        "Ugotuj ryż i podsmaż cebulę z mięsem mielonym.",
+        "Dodaj warzywa, przyprawy i wymieszaj z ryżem.",
+        "Napełnij połówki papryk farszem.",
+        "Zapiekaj w piekarniku ok. 30 minut w 180°C."
+    ]
+  },
+  {
+    "id": 40,
+    "imgUrl": "assets/images/z8g5swJG.jpg",
+    "name": "Ryż z kurczakiem po chińsku",
+    "description": "Smażony ryż z kurczakiem, warzywami i sosem sojowym w stylu azjatyckim.",
+    "instructions": [
+        "Podsmaż kawałki kurczaka na oleju z przyprawami.",
+        "Dodaj marchew, cebulę i czosnek.",
+        "Wsyp ugotowany ryż i wlej sos sojowy.",
+        "Wymieszaj i smaż przez kilka minut."
+    ]
+  },
+  {
+    "id": 41,
+    "imgUrl": "assets/images/sYTPL2e2.jpg",
+    "name": "Bowl z łososiem",
+    "description": "Zdrowy bowl z pieczonym łososiem, ryżem, warzywami, owocami i sosem.",
+    "instructions": [
+        "Upiecz łososia w piekarniku z przyprawami.",
+        "Ugotuj ryż i przygotuj świeże warzywa i owoce (ogórek, awokado, mango).",
+        "Ułóż wszystko w misce.",
+        "Polej sosem np. na bazie sosu sojowego, sezamu i limonki."
+    ]
+  },
+  {
+    "id": 42,
+    "imgUrl": "assets/images/Uib8-W1s.jpg",
+    "name": "Rigatoni z sosem marinara i pulpetami",
+    "description": "Makaron rigatoni z klasycznym sosem pomidorowym i pulpetami.",
+    "instructions": [
+        "Uformuj pulpety z mięsa i podsmaż je.",
+        "Dodaj przecier pomidorowy i gotuj z ziołami.",
+        "Ugotuj makaron rigatoni al dente.",
+        "Połącz z sosem i pulpetami, podawaj z parmezanem."
+    ]
+  },
+  {
+    "id": 43,
+    "imgUrl": "assets/images/x567-SCw.jpg",
+    "name": "Makaron z pomidorkami i buratą z piekarnika",
+    "description": "Pieczony makaron z pomidorkami koktajlowymi i kremową buratą.",
+    "instructions": [
+        "W naczyniu ułóż pomidory z oliwą, czosnkiem i ziołami.",
+        "Zapiekaj w piekarniku 20 minut.",
+        "Ugotuj makaron i wymieszaj z upieczonymi pomidorami.",
+        "Na wierzch dodaj buratę i lekko wymieszaj."
+    ]
+  },
+  {
+    "id": 44,
+    "imgUrl": "assets/images/8LhjxilQ.jpg",
+    "name": "Kimchi-dog",
+    "description": "Hot-dog z koreańskim twistem – kiełbasa z kimchi, majonezem i sezamem.",
+    "instructions": [
+        "Podsmaż kiełbaskę na patelni.",
+        "Podgrzej bułkę do hot-dogów.",
+        "Nałóż kimchi, kiełbasę, majonez i sezam.",
+        "Podawaj na ciepło z dodatkami."
+    ]
+  },
+  {
+    "id": 45,
+    "imgUrl": "assets/images/93WSCgH2.jpg",
+    "name": "Kluski śląskie z pulpetami",
+      "description": "Tradycyjne kluski ziemniaczane z mięsnymi pulpetami w sosie.",
+      "instructions": [
+          "Ugotuj ziemniaki i przygotuj ciasto na kluski.",
+          "Uformuj kluski z dziurką i gotuj w osolonej wodzie.",
+          "Przygotuj pulpety i podsmaż je.",
+          "Zalej sosem i podawaj z kluskami."
+      ]
+  },
+  {
+    "id": 46,
+    "imgUrl": "assets/images/T0ZZtjep.jpg",
+    "name": "Pinsa z pesto i pomidorkami",
+      "description": "Chrupiąca pinsa z pesto, pomidorkami koktajlowymi i mozzarellą.",
+      "instructions": [
+          "Posmaruj spód pinsy pesto.",
+          "Dodaj pokrojone pomidorki i mozzarellę.",
+          "Zapiekaj w piekarniku 10–12 minut.",
+          "Podawaj z rukolą lub bazylią."
+      ]
+  },
+  {
+    "id": 47,
+    "imgUrl": "assets/images/TPwhLMUP.jpg",
+    "name": "Sałatka z halumi",
+      "description": "Lekka sałatka z grillowanym serem halloumi, warzywami i dressingiem.",
+      "instructions": [
+          "Pokrój i zgrilluj ser halloumi.",
+          "Przygotuj mieszankę sałat i warzyw.",
+          "Dodaj halloumi do sałatki.",
+          "Skrop dressingiem np. z oliwy i cytryny."
+      ]
+  },
+  {
+    "id": 48,
+    "imgUrl": "assets/images/vPwP5DYs.jpg",
+    "name": "Szaszłyki z kurczakiem i warzywami",
+      "description": "Kolorowe szaszłyki z kurczakiem i warzywami grillowane lub pieczone.",
+      "instructions": [
+          "Pokrój kurczaka i warzywa w kostkę.",
+          "Nadziewaj na patyczki na przemian.",
+          "Dopraw i grilluj lub piecz ok. 20 minut.",
+          "Podawaj z sosem lub pieczywem."
+      ]
+  },
+  {
+    "id": 49,
+    "imgUrl": "assets/images/w2iuaGkX.jpg",
+    "name": "Pieczona polędwica",
+      "description": "Polędwica wieprzowa pieczona w przyprawach i sosie musztardowym",
+      "instructions": [
+          "Natrzyj polędwicę przyprawami, czosnkiem i musztardą.",
+          "Podsmaż na patelni dla koloru.",
+          "Wstaw do piekarnika na 25–30 minut.",
+          "Odstaw na chwilę przed krojeniem."
+      ]
+  },
+  {
+    "id": 50,
+    "imgUrl": "assets/images/x0VOz-CM.jpg",
+    "name": "Nóżki z kurczaka",
+      "description": "Pieczone udka z kurczaka w ziołowej marynacie, chrupiące z zewnątrz, soczyste w środku.",
+      "instructions": [
+          "Zamarynuj nóżki w przyprawach i oliwie.",
+          "Odstaw na minimum 30 minut.",
+          "Piecz w 200°C przez ok. 40 minut.",
+          "Podawaj z ziemniakami lub sałatką."
+      ]
   },
 ];
 
